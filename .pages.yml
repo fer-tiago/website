@@ -16,7 +16,6 @@ content:
       - name: title
         label: Title
         type: string
-        required: true
       - name: cover_image
         label: Cover Image
         type: image
