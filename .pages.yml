@@ -9,9 +9,6 @@ content:
     path: _posts
     format: frontmatter
     filename: "{year}-{month}-{day}-{slug}.md"
-    list:
-      - title
-      - cover_image
     fields:
       - name: title
         label: Title
