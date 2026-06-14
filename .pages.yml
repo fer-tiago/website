@@ -8,7 +8,6 @@ content:
     type: collection
     path: _posts
     format: frontmatter
-    # This defines the full filename including the date prefix and extension
     filename: "{year}-{month}-{day}-{slug}.md"
     list:
       - title
@@ -21,6 +20,3 @@ content:
       - name: cover_image
         label: Cover Image
         type: image
-      - name: body
-        label: Content
-        type: rich-text
