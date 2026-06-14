@@ -1,15 +1,12 @@
 ---
-title: "Welcome to My Website"
-heading: "Hello, World!"
+layout: default
+title: "Visual Archive"
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ page.title }}</title>
-</head>
-<body>
-    <h1>{{ page.heading }}</h1>
-    <p>This is my static site.</p>
-</body>
-</html>
+
+<div class="gallery-grid">
+    {% for post in site.posts %}
+        <a href="{{ site.baseurl }}{{ post.url }}">
+            <img src="{{ site.baseurl }}{{ post.cover_image }}" alt="{{ post.title }}">
+        </a>
+    {% endfor %}
+</div>
