@@ -5,8 +5,8 @@ title: "Visual Archive"
 
 <div class="gallery-grid">
     {% for post in site.posts %}
-<a href="{{ post.url | relative_url }}">
-    <img src="{{ post.cover_image | relative_url }}" alt="{{ post.title }}">
-</a>
+        <a href="{{ post.url | relative_url }}">
+            <img src="{{ post.cover_image | relative_url }}" alt="{{ post.title }}">
+        </a>
     {% endfor %}
 </div>
