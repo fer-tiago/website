@@ -3,14 +3,18 @@ media:
   output: /assets/images
 
 content:
-  - name: homepage
-    label: Home Page
-    type: file
-    path: index.html
+  - name: posts
+    label: Blog Posts
+    type: collection
+    path: _posts
+    format: frontmatter
     fields:
       - name: title
-        label: Meta Title
+        label: Title
         type: string
-      - name: heading
-        label: Main Heading
-        type: string
+      - name: cover_image
+        label: Cover Image
+        type: image
+      - name: body
+        label: Content
+        type: rich-text
