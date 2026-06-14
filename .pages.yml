@@ -9,6 +9,11 @@ content:
     path: _posts
     format: frontmatter
     filename: "{year}-{month}-{day}-{slug}.md"
+    # This list defines what you see in the CMS table view
+    list:
+      - title
+      - date
+    # These fields define what you edit in the CMS
     fields:
       - name: title
         label: Title
@@ -17,7 +22,6 @@ content:
       - name: cover_image
         label: Cover Image
         type: image
-        required: true
       - name: body
         label: Content
         type: markdown
