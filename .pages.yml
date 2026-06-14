@@ -4,25 +4,27 @@ media:
 
 content:
   - name: posts
-    label: Blog Posts
+    label: Visual Archive
     type: collection
     path: _posts
-    format: frontmatter
     filename: "{year}-{month}-{day}-{slug}.md"
-    # This list defines what you see in the CMS table view
-    list:
-      - title
-      - date
-    # These fields define what you edit in the CMS
+
     fields:
       - name: title
         label: Title
         type: string
         required: true
+
+      - name: date
+        label: Date
+        type: date
+        required: true
+
       - name: cover_image
         label: Cover Image
         type: image
+        required: true
+
       - name: body
         label: Content
-        type: markdown
-        required: true
+        type: rich-text
