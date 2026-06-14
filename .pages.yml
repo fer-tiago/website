@@ -1,1 +1,16 @@
-asd
+media:
+  input: assets/images
+  output: /assets/images
+
+content:
+  - name: homepage
+    label: Home Page
+    type: file
+    path: index.html
+    fields:
+      - name: title
+        label: Meta Title
+        type: string
+      - name: heading
+        label: Main Heading
+        type: string
