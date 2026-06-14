@@ -8,10 +8,8 @@ content:
     type: collection
     path: _posts
     format: frontmatter
-    # Simplified filename template
-    filename: "{slug}" 
-    # Explicitly define the extension
-    extension: md
+    # This defines the full filename including the date prefix and extension
+    filename: "{year}-{month}-{day}-{slug}.md"
     list:
       - title
       - cover_image
