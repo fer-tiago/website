@@ -8,6 +8,10 @@ content:
     type: collection
     path: _posts
     format: frontmatter
+    filename: "{year}-{month}-{day}-{slug}"
+    list:
+      - title
+      - cover_image
     fields:
       - name: title
         label: Title
