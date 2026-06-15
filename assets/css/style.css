@@ -5,8 +5,7 @@
 
 
 .gallery-grid {
-    gap: 16px;
-    padding: 16px;
+    gap: 8px;
     display: flex;
     flex-flow: wrap;
     height: 100%;
