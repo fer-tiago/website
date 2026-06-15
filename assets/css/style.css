@@ -1,20 +1,25 @@
+.body {
+    margin: 0;
+    overflow-y: hidden;
+}
+
+
 .gallery-grid {
     gap: 16px;
     padding: 16px;
     display: flex;
     flex-flow: wrap;
-  height: fit-content;
+    height: 100%;
+    overflow-y: hidden;
 }
 
 .gallery-grid a {
-    height: fit-content;
-    width: 300px;
+    height: 100%
+    width: 80px;
     overflow: clip;
 }
 
 
 .gallery-grid a img {
-    max-width: 600px;
-    min-height: 600px;
-    max-height: 600px;
+    min-height: 100%;
 }
