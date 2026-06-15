@@ -3,6 +3,13 @@ layout: default
 title: "Visual Archive"
 ---
 
+<style>
+body {
+    background: #111;
+    color: white;
+}
+</style>
+
 <div class="gallery-grid">
     {% for post in site.posts %}
         <a href="{{ post.url | relative_url }}">
