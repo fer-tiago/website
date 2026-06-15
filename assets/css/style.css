@@ -14,7 +14,7 @@
 }
 
 .gallery-grid a {
-    height: 100%;
+    height: auto;
     width: 80px;
     overflow: clip;
 }
