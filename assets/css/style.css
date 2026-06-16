@@ -53,12 +53,12 @@
 
 .text-slice.left {
     writing-mode: vertical-rl;
-    transform: scaleY(-1);
+    transform: scaleX(-1);
 }
 
 .text-slice.left .text-slice-link {
     display: inline-block;
-    transform: scaleY(-1);
+    transform: scaleX(-1);
 }
 
 .text-slice-link {
