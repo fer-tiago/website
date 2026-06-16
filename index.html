@@ -30,7 +30,7 @@ const textSlices = [
 {% for slice in site.slices %}
 {
     text: {{ slice.text | jsonify }},
-    url: {{ slice.url | default: "" | jsonify }}
+    link: {{ slice.link | default: "" | jsonify }}
 },
 {% endfor %}
 ];
@@ -40,20 +40,18 @@ const usedPositions = new Set();
 
 textSlices.forEach(item => {
 
-    let element;
+    const element = document.createElement('div');
+    element.className = 'text-slice';
 
-    if (item.url && item.url.trim() !== '') {
-        element = document.createElement('a');
-        element.href = item.url;
+    if (item.link && item.link.trim() !== '') {
+        element.innerHTML =
+            `<a href="${item.link}" class="text-slice-link">${item.text}</a>`;
     } else {
-        element = document.createElement('div');
+        element.textContent = item.text;
     }
 
-    element.className = 'text-slice';
-    element.textContent = item.text;
-
-    // Positions allowed: 1 to 14
-    // (never first position 0)
+    // Allowed positions: 1–14
+    // Never the first column (0)
     const maxPosition = Math.min(14, gallery.children.length);
 
     let position;
