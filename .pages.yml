@@ -20,6 +20,11 @@ content:
         type: date
         required: true
 
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+
       - name: cover_image
         label: Cover Image
         type: image
