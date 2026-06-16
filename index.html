@@ -3,17 +3,61 @@ layout: default
 title: "Visual Archive"
 ---
 
-<style>
-body {
-    margin: 0;
-    overflow-y: hidden;
-}
-</style>
+<div class="gallery-grid" id="gallery">
 
-<div class="gallery-grid">
-    {% for post in site.posts %}
-        <a href="{{ post.url | relative_url }}">
-            <img src="{{ post.cover_image | relative_url }}" alt="{{ post.title }}">
+    {% assign posts = site.posts | sort: "date" | reverse %}
+
+    {% for post in posts %}
+        <a
+            class="image-slice"
+            href="{{ post.url | relative_url }}"
+        >
+            <img
+                src="{{ post.cover_image | relative_url }}"
+                alt="{{ post.title }}"
+            >
         </a>
     {% endfor %}
+
 </div>
+
+<script>
+const textSlices = [
+{% for slice in site.slices %}
+{
+    text: {{ slice.text | jsonify }},
+    url: {{ slice.url | default: "" | jsonify }}
+},
+{% endfor %}
+];
+
+const gallery = document.getElementById('gallery');
+
+textSlices.forEach(item => {
+
+    let element;
+
+    if (item.url && item.url.trim() !== '') {
+        element = document.createElement('a');
+        element.href = item.url;
+    } else {
+        element = document.createElement('div');
+    }
+
+    element.className = 'text-slice';
+    element.textContent = item.text;
+
+    const position = Math.floor(
+        Math.random() * (gallery.children.length + 1)
+    );
+
+    if (gallery.children[position]) {
+        gallery.insertBefore(
+            element,
+            gallery.children[position]
+        );
+    } else {
+        gallery.appendChild(element);
+    }
+});
+</script>
