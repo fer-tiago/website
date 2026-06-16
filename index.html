@@ -3,6 +3,10 @@ layout: default
 title: "Visual Archive"
 ---
 
+<style> 
+    body { margin: 0; overflow-y: hidden; } 
+</style>
+
 <div class="gallery-grid" id="gallery">
 
     {% assign posts = site.posts | sort: "date" | reverse %}
