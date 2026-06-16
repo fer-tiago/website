@@ -5,20 +5,45 @@
 
 
 .gallery-grid {
-    gap: 8px;
+.gallery-grid {
     display: flex;
-    flex-flow: wrap;
     height: 100vh;
-    overflow-y: hidden;
+    gap: 8px;
+    overflow: hidden;
 }
 
-.gallery-grid a {
-    height: auto;
+.image-slice {
     width: 80px;
-    overflow: clip;
+    overflow: hidden;
+    flex-shrink: 0;
 }
 
-
-.gallery-grid a img {
+.image-slice img {
     min-height: 100%;
+    width: auto;
+    display: block;
+}
+
+.text-slice {
+    width: 80px;
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+
+    color: #666;
+    text-decoration: none;
+
+    font-size: 12px;
+    letter-spacing: 1px;
+
+    flex-shrink: 0;
+}
+
+.text-slice:hover {
+    color: black;
 }
