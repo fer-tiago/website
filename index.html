@@ -51,9 +51,9 @@ textSlices.forEach(item => {
     element.className = 'text-slice';
     element.textContent = item.text;
 
-    const position = Math.floor(
-        Math.random() * (gallery.children.length + 1)
-    );
+const position = Math.floor(
+    Math.random() * Math.min(14, gallery.children.length)
+) + 1;
 
     if (gallery.children[position]) {
         gallery.insertBefore(
