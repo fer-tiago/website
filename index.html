@@ -36,6 +36,7 @@ const textSlices = [
 ];
 
 const gallery = document.getElementById('gallery');
+const usedPositions = new Set();
 
 textSlices.forEach(item => {
 
@@ -51,9 +52,20 @@ textSlices.forEach(item => {
     element.className = 'text-slice';
     element.textContent = item.text;
 
-const position = Math.floor(
-    Math.random() * Math.min(14, gallery.children.length)
-) + 1;
+    // Positions allowed: 1 to 14
+    // (never first position 0)
+    const maxPosition = Math.min(14, gallery.children.length);
+
+    let position;
+
+    do {
+        position = Math.floor(Math.random() * maxPosition) + 1;
+    } while (
+        usedPositions.has(position) &&
+        usedPositions.size < maxPosition
+    );
+
+    usedPositions.add(position);
 
     if (gallery.children[position]) {
         gallery.insertBefore(
