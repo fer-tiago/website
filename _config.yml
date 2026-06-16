@@ -1,1 +1,4 @@
 baseurl: "/website"
+collections:
+  slices:
+    output: false
