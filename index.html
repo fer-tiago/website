@@ -30,7 +30,8 @@ const textSlices = [
 {% for slice in site.slices %}
 {
     text: {{ slice.text | jsonify }},
-    link: {{ slice.link | default: "" | jsonify }}
+    link: {{ slice.link | default: "" | jsonify }},
+    side: {{ slice.side | default: "right" | jsonify }}
 },
 {% endfor %}
 ];
@@ -42,6 +43,7 @@ textSlices.forEach(item => {
 
     const element = document.createElement('div');
     element.className = 'text-slice';
+    element.classList.add(item.side || 'right');
 
     if (item.link && item.link.trim() !== '') {
         element.innerHTML =
