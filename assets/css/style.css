@@ -47,6 +47,20 @@
     color: black;
 }
 
+.text-slice.right {
+    writing-mode: vertical-rl;
+}
+
+.text-slice.left {
+    writing-mode: vertical-rl;
+    transform: scaleX(-1);
+}
+
+.text-slice.left .text-slice-link {
+    display: inline-block;
+    transform: scaleX(-1);
+}
+
 .text-slice-link {
     color: inherit;
     text-decoration: none;
