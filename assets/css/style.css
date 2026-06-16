@@ -5,7 +5,6 @@
 
 
 .gallery-grid {
-.gallery-grid {
     display: flex;
     height: 100vh;
     gap: 8px;
