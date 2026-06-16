@@ -40,6 +40,11 @@ content:
     path: _slices
 
     fields:
-      - name: text
-        label: Text
-        type: text
+    - name: text
+      label: Text
+      type: string
+
+    - name: url
+      label: Link
+      type: string
+      required: false
