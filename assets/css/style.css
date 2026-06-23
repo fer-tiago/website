@@ -69,3 +69,28 @@
 .text-slice-link:hover {
     text-decoration: underline;
 }
+.text-slice {
+    width: 80px;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+.text-slice-section {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+}
+
+.text-slice-link {
+    color: inherit;
+    text-decoration: none;
+}
