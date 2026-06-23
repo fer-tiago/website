@@ -40,15 +40,33 @@ content:
     path: _slices
 
     fields:
-      - name: text
-        label: Text
+      - name: top_text
+        label: Top Text
         type: string
-
-      - name: link
-        label: Link
+    
+      - name: top_link
+        label: Top Link
         type: string
         required: false
-
+    
+      - name: middle_text
+        label: Middle Text
+        type: string
+    
+      - name: middle_link
+        label: Middle Link
+        type: string
+        required: false
+    
+      - name: bottom_text
+        label: Bottom Text
+        type: string
+    
+      - name: bottom_link
+        label: Bottom Link
+        type: string
+        required: false
+    
       - name: side
         label: Side
         type: string
