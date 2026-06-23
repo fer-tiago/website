@@ -2,9 +2,14 @@
 layout: default
 title: "Visual Archive"
 ---
+
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-<style> 
-    body { margin: 0; overflow-y: hidden; } 
+
+<style>
+body {
+    margin: 0;
+    overflow-y: hidden;
+}
 </style>
 
 <div class="gallery-grid" id="gallery">
@@ -15,6 +20,7 @@ title: "Visual Archive"
         <a
             class="image-slice"
             href="{{ post.url | relative_url }}"
+            data-tags="{{ post.tags | join: ',' }}"
         >
             <img
                 src="{{ post.cover_image | relative_url }}"
@@ -26,40 +32,98 @@ title: "Visual Archive"
 </div>
 
 <script>
+
+// ----------------------------------------
+// TAG FILTERING
+// ----------------------------------------
+
+const params = new URLSearchParams(window.location.search);
+const activeTag = params.get('tag') || 'design';
+
+document.querySelectorAll('.image-slice').forEach(post => {
+
+    const tags = (post.dataset.tags || '').split(',');
+
+    if (!tags.includes(activeTag)) {
+        post.style.display = 'none';
+    }
+
+});
+
+// ----------------------------------------
+// TEXT SLICES DATA
+// ----------------------------------------
+
 const textSlices = [
 {% for slice in site.slices %}
 {
-    text: {{ slice.text | jsonify }},
-    link: {{ slice.link | default: "" | jsonify }},
+    topText: {{ slice.top_text | default: "" | jsonify }},
+    topLink: {{ slice.top_link | default: "" | jsonify }},
+
+    middleText: {{ slice.middle_text | default: "" | jsonify }},
+    middleLink: {{ slice.middle_link | default: "" | jsonify }},
+
+    bottomText: {{ slice.bottom_text | default: "" | jsonify }},
+    bottomLink: {{ slice.bottom_link | default: "" | jsonify }},
+
     side: {{ slice.side | default: "right" | jsonify }}
 },
 {% endfor %}
 ];
 
+// ----------------------------------------
+// BUILD TEXT SLICES
+// ----------------------------------------
+
 const gallery = document.getElementById('gallery');
 const usedPositions = new Set();
+
+function makeSection(text, link) {
+
+    if (!text) return '';
+
+    if (link && link.trim() !== '') {
+        return `
+            <div class="text-slice-section">
+                <a href="${link}" class="text-slice-link">
+                    ${text}
+                </a>
+            </div>
+        `;
+    }
+
+    return `
+        <div class="text-slice-section">
+            ${text}
+        </div>
+    `;
+}
 
 textSlices.forEach(item => {
 
     const element = document.createElement('div');
+
     element.className = 'text-slice';
     element.classList.add(item.side || 'right');
 
-    if (item.link && item.link.trim() !== '') {
-        element.innerHTML =
-            `<a href="${item.link}" class="text-slice-link">${item.text}</a>`;
-    } else {
-        element.textContent = item.text;
-    }
+    element.innerHTML =
+        makeSection(item.topText, item.topLink) +
+        makeSection(item.middleText, item.middleLink) +
+        makeSection(item.bottomText, item.bottomLink);
 
     // Allowed positions: 1–14
-    // Never the first column (0)
-    const maxPosition = Math.min(14, gallery.children.length);
+    const maxPosition = Math.min(
+        14,
+        gallery.children.length
+    );
 
     let position;
 
     do {
-        position = Math.floor(Math.random() * maxPosition) + 1;
+        position =
+            Math.floor(
+                Math.random() * maxPosition
+            ) + 1;
     } while (
         usedPositions.has(position) &&
         usedPositions.size < maxPosition
@@ -68,12 +132,18 @@ textSlices.forEach(item => {
     usedPositions.add(position);
 
     if (gallery.children[position]) {
+
         gallery.insertBefore(
             element,
             gallery.children[position]
         );
+
     } else {
+
         gallery.appendChild(element);
+
     }
+
 });
+
 </script>
