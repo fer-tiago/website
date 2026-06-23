@@ -1,4 +1,0 @@
----
-text: photography
-side: right
----
