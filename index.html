@@ -54,21 +54,53 @@ const tracks = [
 
 ];
 
-const currentTrack =
-    tracks[Math.floor(Math.random() * tracks.length)];
+let player;
+let currentTrack;
 
-const player =
-    new Audio(currentTrack.file);
+if (window.archivePlayer) {
+
+    player =
+        window.archivePlayer;
+
+    currentTrack =
+        window.archiveTrack;
+
+} else {
+
+    currentTrack =
+        tracks[
+            Math.floor(
+                Math.random() *
+                tracks.length
+            )
+        ];
+
+    player =
+        new Audio(
+            currentTrack.file
+        );
+
+    player.loop = true;
+
+    window.archivePlayer =
+        player;
+
+    window.archiveTrack =
+        currentTrack;
+
+}
 
 // ----------------------------------------
 // TAG FILTERING
 // ----------------------------------------
 
-const activeTag =
+let activeTag =
     new URLSearchParams(window.location.search)
         .get('tag') || 'design';
 
-function filterGallery() {
+function applyTag(tag) {
+
+    activeTag = tag;
 
     document
         .querySelectorAll('.image-slice')
@@ -76,10 +108,10 @@ function filterGallery() {
 
             const tags = (post.dataset.tags || '')
                 .split(',')
-                .map(tag => tag.trim().toLowerCase());
+                .map(t => t.trim().toLowerCase());
 
             post.style.display =
-                tags.includes(activeTag.toLowerCase())
+                tags.includes(tag.toLowerCase())
                     ? ''
                     : 'none';
 
@@ -87,8 +119,50 @@ function filterGallery() {
 
 }
 
-filterGallery();
+applyTag(activeTag);
 
+// ----------------------------------------
+// INTERCEPT TAG LINKS
+// ----------------------------------------
+
+document.addEventListener('click', event => {
+
+    const link =
+        event.target.closest('a');
+
+    if (!link) return;
+
+    const href =
+        link.getAttribute('href');
+
+    if (!href) return;
+
+    if (!href.startsWith('?tag=')) return;
+
+    event.preventDefault();
+
+    const tag =
+        href.replace('?tag=', '');
+
+    history.pushState(
+        {},
+        '',
+        '?tag=' + tag
+    );
+
+    applyTag(tag);
+
+});
+
+window.addEventListener('popstate', () => {
+
+    const tag =
+        new URLSearchParams(window.location.search)
+            .get('tag') || 'design';
+
+    applyTag(tag);
+
+});
 // ----------------------------------------
 // TEXT SLICES DATA
 // ----------------------------------------
@@ -123,8 +197,7 @@ const textSlices = [
     },
     {% endfor %}
 
-];
-
+];    
 // ----------------------------------------
 // TEXT SLICE HELPERS
 // ----------------------------------------
@@ -223,7 +296,15 @@ textSlices
 const overlay =
     document.getElementById('intro-overlay');
 
+const hasEntered =
+    sessionStorage.getItem('archiveEntered');
+    
 async function enterArchive() {
+
+    sessionStorage.setItem(
+        'archiveEntered',
+        'true'
+    );
 
     try {
         await player.play();
@@ -232,14 +313,24 @@ async function enterArchive() {
     overlay.classList.add('hidden');
 
     setTimeout(() => {
+
         overlay.remove();
+
     }, 1200);
 
 }
+    
+if (hasEntered) {
 
-overlay.addEventListener(
-    'click',
-    enterArchive
-);
+    overlay.remove();
+
+} else {
+
+    overlay.addEventListener(
+        'click',
+        enterArchive
+    );
+
+}
 
 </script>
