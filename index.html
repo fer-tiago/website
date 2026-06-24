@@ -3,6 +3,12 @@ layout: default
 title: "Visual Archive"
 ---
 
+---
+
+layout: default
+title: "Visual Archive"
+-----------------------
+
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
 <style>
@@ -12,126 +18,190 @@ body {
 }
 </style>
 
+<div id="intro-overlay">
+    <div id="intro-message">
+        CLICK TO ENTER
+    </div>
+</div>
+
 <div class="gallery-grid" id="gallery">
 
-    {% assign posts = site.posts | sort: "date" | reverse %}
+```
+{% assign posts = site.posts | sort: "date" | reverse %}
 
-    {% for post in posts %}
-        <a
-            class="image-slice"
-            href="{{ post.url | relative_url }}"
-            data-tags="{{ post.tags | join: ',' }}"
+{% for post in posts %}
+    <a
+        class="image-slice"
+        href="{{ post.url | relative_url }}"
+        data-tags="{{ post.tags | join: ',' }}"
+    >
+        <img
+            src="{{ post.cover_image | relative_url }}"
+            alt="{{ post.title }}"
         >
-            <img
-                src="{{ post.cover_image | relative_url }}"
-                alt="{{ post.title }}"
-            >
-        </a>
-    {% endfor %}
+    </a>
+{% endfor %}
+```
 
 </div>
 
 <script>
 
 // ----------------------------------------
+// MUSIC
+// ----------------------------------------
+
+const tracks = [
+    {
+        file: "{{ '/assets/audio/track1.mp3' | relative_url }}",
+        artist: "Artist Name",
+        title: "Track Title"
+    },
+    {
+        file: "{{ '/assets/audio/track2.mp3' | relative_url }}",
+        artist: "Artist Name",
+        title: "Track Title"
+    }
+];
+
+const currentTrack =
+    tracks[Math.floor(Math.random() * tracks.length)];
+
+const player =
+    new Audio(currentTrack.file);
+
+// ----------------------------------------
 // TAG FILTERING
 // ----------------------------------------
 
-const params = new URLSearchParams(window.location.search);
-const activeTag = params.get('tag') || 'design';
+const activeTag =
+    new URLSearchParams(window.location.search)
+        .get('tag') || 'design';
 
-document.querySelectorAll('.image-slice').forEach(post => {
+function filterGallery() {
 
-    const tags = (post.dataset.tags || '')
-        .split(',')
-        .map(tag => tag.trim().toLowerCase());
+    document
+        .querySelectorAll('.image-slice')
+        .forEach(post => {
 
-    if (!tags.includes(activeTag.toLowerCase())) {
-        post.style.display = 'none';
-    }
+            const tags = (post.dataset.tags || '')
+                .split(',')
+                .map(tag => tag.trim().toLowerCase());
 
-});
+            post.style.display =
+                tags.includes(activeTag.toLowerCase())
+                    ? ''
+                    : 'none';
+
+        });
+
+}
+
+filterGallery();
 
 // ----------------------------------------
 // TEXT SLICES DATA
 // ----------------------------------------
 
 const textSlices = [
-{% for slice in site.slices %}
-{
-    topText: {{ slice.top_text | default: "" | jsonify }},
-    topLink: {{ slice.top_link | default: "" | jsonify }},
 
-    middleText: {{ slice.middle_text | default: "" | jsonify }},
-    middleLink: {{ slice.middle_link | default: "" | jsonify }},
+    {
+        topText: 'Now Playing',
+        topLink: '',
 
-    bottomText: {{ slice.bottom_text | default: "" | jsonify }},
-    bottomLink: {{ slice.bottom_link | default: "" | jsonify }},
+        middleText: currentTrack.title,
+        middleLink: '',
 
-    side: {{ slice.side | default: "right" | jsonify }}
-},
-{% endfor %}
+        bottomText: currentTrack.artist,
+        bottomLink: '',
+
+        side: 'left'
+    },
+
+    {% for slice in site.slices %}
+    {
+        topText: {{ slice.top_text | default: "" | jsonify }},
+        topLink: {{ slice.top_link | default: "" | jsonify }},
+
+        middleText: {{ slice.middle_text | default: "" | jsonify }},
+        middleLink: {{ slice.middle_link | default: "" | jsonify }},
+
+        bottomText: {{ slice.bottom_text | default: "" | jsonify }},
+        bottomLink: {{ slice.bottom_link | default: "" | jsonify }},
+
+        side: {{ slice.side | default: "right" | jsonify }}
+    },
+    {% endfor %}
+
 ];
 
 // ----------------------------------------
-// BUILD TEXT SLICES
+// TEXT SLICE HELPERS
 // ----------------------------------------
 
-const gallery = document.getElementById('gallery');
-const usedPositions = new Set();
+const gallery =
+    document.getElementById('gallery');
 
-function makeSection(text, link) {
+const occupiedPositions =
+    new Set();
+
+function createSection(text, link = '') {
 
     if (!text) return '';
 
-    if (link && link.trim() !== '') {
-        return `
-            <div class="text-slice-section">
-                <a href="${link}" class="text-slice-link">
-                    ${text}
-                </a>
-            </div>
-        `;
-    }
-
     return `
         <div class="text-slice-section">
-            ${text}
+            ${
+                link
+                    ? `<a href="${link}" class="text-slice-link">${text}</a>`
+                    : text
+            }
         </div>
     `;
 }
 
-textSlices.forEach(item => {
+function createTextSlice(data) {
 
-    const element = document.createElement('div');
+    const element =
+        document.createElement('div');
 
-    element.className = 'text-slice';
-    element.classList.add(item.side || 'right');
+    element.className =
+        `text-slice ${data.side || 'right'}`;
 
     element.innerHTML =
-        makeSection(item.topText, item.topLink) +
-        makeSection(item.middleText, item.middleLink) +
-        makeSection(item.bottomText, item.bottomLink);
+        createSection(data.topText, data.topLink) +
+        createSection(data.middleText, data.middleLink) +
+        createSection(data.bottomText, data.bottomLink);
 
-    // Allowed positions: 1–14
-    const maxPosition = Math.min(
-        14,
-        gallery.children.length
-    );
+    return element;
+}
+
+function randomPosition() {
+
+    const max =
+        Math.min(14, gallery.children.length);
 
     let position;
 
     do {
+
         position =
-            Math.floor(
-                Math.random() * maxPosition
-            ) + 1;
+            Math.floor(Math.random() * max) + 1;
+
     } while (
-        usedPositions.has(position) &&
-        usedPositions.size < maxPosition
+        occupiedPositions.has(position) &&
+        occupiedPositions.size < max
     );
 
-    usedPositions.add(position);
+    occupiedPositions.add(position);
+
+    return position;
+}
+
+function insertSlice(element) {
+
+    const position =
+        randomPosition();
 
     if (gallery.children[position]) {
 
@@ -146,6 +216,40 @@ textSlices.forEach(item => {
 
     }
 
-});
+}
+
+// ----------------------------------------
+// BUILD SLICES
+// ----------------------------------------
+
+textSlices
+    .map(createTextSlice)
+    .forEach(insertSlice);
+
+// ----------------------------------------
+// INTRO OVERLAY
+// ----------------------------------------
+
+const overlay =
+    document.getElementById('intro-overlay');
+
+async function enterArchive() {
+
+    try {
+        await player.play();
+    } catch {}
+
+    overlay.classList.add('hidden');
+
+    setTimeout(() => {
+        overlay.remove();
+    }, 1200);
+
+}
+
+overlay.addEventListener(
+    'click',
+    enterArchive
+);
 
 </script>
