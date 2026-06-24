@@ -24,5 +24,28 @@ layout: default
     <div class="post-body">
         {{ content }}
     </div>
+    
+<button
+    class="back-button"
+    onclick="goBack()"
+>
+    ← Back
+</button>
 
+<script>
+function goBack() {
+
+    if (history.length > 1) {
+
+        history.back();
+
+    } else {
+
+        window.location.href =
+            '{{ "/" | relative_url }}';
+
+    }
+
+}
+</script>
 </article>
