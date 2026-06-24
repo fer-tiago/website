@@ -96,26 +96,32 @@
 #intro-overlay {
     position: fixed;
     inset: 0;
-    background: white;
-    z-index: 99999;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: #fff;
 
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
+    z-index: 99999;
     cursor: pointer;
 
-    transition: opacity 1.2s ease;
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
 }
 
 #intro-overlay.hidden {
     opacity: 0;
-    pointer-events: none;
+    visibility: hidden;
 }
 
 #intro-message {
-    font-size: 12px;
-    letter-spacing: .25em;
+    font-size: 14px;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
 }
 
