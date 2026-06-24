@@ -71,3 +71,21 @@ content:
         label: Side
         type: string
         default: right
+
+  - name: music
+    label: Music
+    type: collection
+    path: _music
+
+    fields:
+      - name: title
+        label: Track Title
+        type: string
+
+      - name: artist
+        label: Artist
+        type: string
+
+      - name: file
+        label: MP3 File
+        type: string
