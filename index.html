@@ -2,13 +2,6 @@
 layout: default
 title: "Visual Archive"
 ---
-
----
-
-layout: default
-title: "Visual Archive"
------------------------
-
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
 <style>
@@ -26,7 +19,6 @@ body {
 
 <div class="gallery-grid" id="gallery">
 
-```
 {% assign posts = site.posts | sort: "date" | reverse %}
 
 {% for post in posts %}
@@ -41,7 +33,6 @@ body {
         >
     </a>
 {% endfor %}
-```
 
 </div>
 
@@ -52,16 +43,15 @@ body {
 // ----------------------------------------
 
 const tracks = [
-    {
-        file: "{{ '/assets/audio/track1.mp3' | relative_url }}",
-        artist: "Artist Name",
-        title: "Track Title"
-    },
-    {
-        file: "{{ '/assets/audio/track2.mp3' | relative_url }}",
-        artist: "Artist Name",
-        title: "Track Title"
-    }
+
+{% for track in site.music %}
+{
+    title: {{ track.title | jsonify }},
+    artist: {{ track.artist | jsonify }},
+    file: {{ track.file | relative_url | jsonify }}
+},
+{% endfor %}
+
 ];
 
 const currentTrack =
