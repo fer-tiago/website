@@ -298,7 +298,17 @@ const overlay =
 
 const hasEntered =
     sessionStorage.getItem('archiveEntered');
-    
+
+async function startMusic() {
+
+    try {
+        await player.play();
+    } catch (err) {
+        console.log(err);
+    }
+
+}
+
 async function enterArchive() {
 
     sessionStorage.setItem(
@@ -306,9 +316,7 @@ async function enterArchive() {
         'true'
     );
 
-    try {
-        await player.play();
-    } catch {}
+    await startMusic();
 
     overlay.classList.add('hidden');
 
@@ -319,10 +327,12 @@ async function enterArchive() {
     }, 1200);
 
 }
-    
+
 if (hasEntered) {
 
     overlay.remove();
+
+    startMusic();
 
 } else {
 
@@ -332,5 +342,22 @@ if (hasEntered) {
     );
 
 }
+
+// Browser back button / page cache
+window.addEventListener('pageshow', () => {
+
+    if (
+        sessionStorage.getItem('archiveEntered')
+    ) {
+
+        if (overlay) {
+            overlay.remove();
+        }
+
+        startMusic();
+
+    }
+
+});
 
 </script>
