@@ -2,3 +2,5 @@ baseurl: "/website"
 collections:
   slices:
     output: false
+  music:
+    output: false
