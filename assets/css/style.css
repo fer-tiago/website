@@ -91,6 +91,8 @@
     text-decoration: none;
 }
 
+//----- INTRO
+
 #intro-overlay {
     position: fixed;
     inset: 0;
@@ -115,4 +117,30 @@
     font-size: 12px;
     letter-spacing: .25em;
     text-transform: uppercase;
+}
+
+
+//----- POST
+
+
+.post-title {
+    font-size: 2rem;
+}
+
+.post-date {
+    opacity: .5;
+}
+
+.post-image img {
+    max-width: 100%;
+}
+
+.post-body {
+    max-width: 800px;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
 }
