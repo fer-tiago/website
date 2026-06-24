@@ -90,3 +90,29 @@
     color: inherit;
     text-decoration: none;
 }
+
+#intro-overlay {
+    position: fixed;
+    inset: 0;
+    background: white;
+    z-index: 99999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    transition: opacity 1.2s ease;
+}
+
+#intro-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#intro-message {
+    font-size: 12px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+}
