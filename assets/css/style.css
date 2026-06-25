@@ -1,7 +1,7 @@
 @font-face {
     font-family: "Handjet";
 
-    src: url("assets/fonts/Handjet-VariableFont_ELGR,ELSH,wght.ttf")
+    src: url("/website/assets/fonts/Handjet-VariableFont_ELGR,ELSH,wght.ttf")
         format("truetype");
 
     font-style: normal;
