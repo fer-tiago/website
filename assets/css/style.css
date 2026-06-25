@@ -200,7 +200,7 @@ body {
 
 /* Dotted track */
 .volume-slider::-webkit-slider-runnable-track {
-    height: 2px;
+    height: 1px;
     background: black;
 
 }
@@ -209,8 +209,8 @@ body {
 .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
 
-    width: 8px;
-    height: 8px;
+    width: 5px;
+    height: 5px;
 
     margin-top: -3px;
 
