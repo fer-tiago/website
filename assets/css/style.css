@@ -187,6 +187,8 @@ body {
 
     width: 120px;
     height: 20px;
+    
+    transform: rotate(-90deg);
 
     background: transparent;
     cursor: pointer;
