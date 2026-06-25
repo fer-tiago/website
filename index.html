@@ -246,7 +246,15 @@ function createTextSlice(data) {
 if (data.isPlayer) {
 
     element.innerHTML = `
+    
+        <div class="text-slice-section">
+        Now Playing
+        </div>
 
+        <div class="text-slice-section">
+        ${data.trackText}
+        </div>
+        
         <div class="text-slice-section music-controls">
 
             <button
@@ -267,12 +275,8 @@ if (data.isPlayer) {
 
         </div>
 
-        <div class="text-slice-section">
-            ${data.trackText}
-        </div>
 
-        <div class="text-slice-section">
-        </div>
+
 
     `;
 
