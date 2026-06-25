@@ -35,6 +35,8 @@ body {
     min-height: 100%;
     width: auto;
     display: block;
+    object-fit: cover;       /* fills the slice and crops excess */
+    object-position: center; /* crops equally from all sides */
 }
 
 .text-slice {
