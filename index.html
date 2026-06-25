@@ -182,15 +182,16 @@ window.addEventListener('popstate', () => {
 
 const textSlices = [
 
-    {
-        isPlayer: true,
+   {
+    isPlayer: true,
 
-        topText: 'Now Playing',
-        middleText: currentTrack.title,
-        bottomText: currentTrack.artist,
+    trackText:
+        currentTrack.title +
+        ' — ' +
+        currentTrack.artist,
 
-        side: 'left'
-    },
+    side: 'left'
+},
 
     {% for slice in site.slices %}
     {
@@ -242,43 +243,42 @@ function createTextSlice(data) {
     element.className =
         `text-slice ${data.side || 'right'}`;
 
-    if (data.isPlayer) {
+if (data.isPlayer) {
 
-        element.innerHTML = `
-            <div class="text-slice-section">
-                ${data.topText}
-            </div>
+    element.innerHTML = `
 
-            <div class="text-slice-section">
-                ${data.middleText}
-            </div>
+        <div class="text-slice-section music-controls">
 
-            <div class="text-slice-section music-controls">
+            <button
+                class="mute-button"
+                id="muteButton"
+            >
+                MUTE
+            </button>
 
-                <div class="track-artist">
-                    ${data.bottomText}
-                </div>
+            <input
+                type="range"
+                min="0"
+                max="100"
+                value="100"
+                class="volume-slider"
+                id="volumeSlider"
+            >
 
-                <button
-                    class="mute-button"
-                    id="muteButton"
-                >
-                    MUTE
-                </button>
+        </div>
 
-                <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value="100"
-                    class="volume-slider"
-                    id="volumeSlider"
-                >
+        <div class="text-slice-section">
+            ${data.trackText}
+        </div>
 
-            </div>
-        `;
+        <div class="text-slice-section">
+        </div>
 
-    } else {
+    `;
+
+} 
+
+else {
 
         element.innerHTML =
             createSection(data.topText, data.topLink) +
