@@ -82,6 +82,18 @@ if (window.archivePlayer) {
 
     player.loop = true;
 
+    const savedVolume =
+        localStorage.getItem(
+            'archiveVolume'
+        );
+
+    if (savedVolume !== null) {
+
+        player.volume =
+            parseFloat(savedVolume);
+
+    }
+
     window.archivePlayer =
         player;
 
@@ -163,6 +175,7 @@ window.addEventListener('popstate', () => {
     applyTag(tag);
 
 });
+
 // ----------------------------------------
 // TEXT SLICES DATA
 // ----------------------------------------
@@ -170,14 +183,11 @@ window.addEventListener('popstate', () => {
 const textSlices = [
 
     {
+        isPlayer: true,
+
         topText: 'Now Playing',
-        topLink: '',
-
         middleText: currentTrack.title,
-        middleLink: '',
-
         bottomText: currentTrack.artist,
-        bottomLink: '',
 
         side: 'left'
     },
@@ -197,7 +207,8 @@ const textSlices = [
     },
     {% endfor %}
 
-];    
+];
+
 // ----------------------------------------
 // TEXT SLICE HELPERS
 // ----------------------------------------
@@ -231,10 +242,50 @@ function createTextSlice(data) {
     element.className =
         `text-slice ${data.side || 'right'}`;
 
-    element.innerHTML =
-        createSection(data.topText, data.topLink) +
-        createSection(data.middleText, data.middleLink) +
-        createSection(data.bottomText, data.bottomLink);
+    if (data.isPlayer) {
+
+        element.innerHTML = `
+            <div class="text-slice-section">
+                ${data.topText}
+            </div>
+
+            <div class="text-slice-section">
+                ${data.middleText}
+            </div>
+
+            <div class="text-slice-section music-controls">
+
+                <div class="track-artist">
+                    ${data.bottomText}
+                </div>
+
+                <button
+                    class="mute-button"
+                    id="muteButton"
+                >
+                    MUTE
+                </button>
+
+                <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="100"
+                    class="volume-slider"
+                    id="volumeSlider"
+                >
+
+            </div>
+        `;
+
+    } else {
+
+        element.innerHTML =
+            createSection(data.topText, data.topLink) +
+            createSection(data.middleText, data.middleLink) +
+            createSection(data.bottomText, data.bottomLink);
+
+    }
 
     return element;
 }
@@ -290,6 +341,61 @@ textSlices
     .forEach(insertSlice);
 
 // ----------------------------------------
+// PLAYER CONTROLS
+// ----------------------------------------
+
+const volumeSlider =
+    document.getElementById(
+        'volumeSlider'
+    );
+
+const muteButton =
+    document.getElementById(
+        'muteButton'
+    );
+
+if (volumeSlider) {
+
+    volumeSlider.value =
+        player.volume * 100;
+
+    volumeSlider.addEventListener(
+        'input',
+        () => {
+
+            player.volume =
+                volumeSlider.value / 100;
+
+            localStorage.setItem(
+                'archiveVolume',
+                player.volume
+            );
+
+        }
+    );
+
+}
+
+if (muteButton) {
+
+    muteButton.addEventListener(
+        'click',
+        () => {
+
+            player.muted =
+                !player.muted;
+
+            muteButton.textContent =
+                player.muted
+                    ? 'UNMUTE'
+                    : 'MUTE';
+
+        }
+    );
+
+}
+
+// ----------------------------------------
 // INTRO OVERLAY
 // ----------------------------------------
 
@@ -297,7 +403,9 @@ const overlay =
     document.getElementById('intro-overlay');
 
 const hasEntered =
-    sessionStorage.getItem('archiveEntered');
+    sessionStorage.getItem(
+        'archiveEntered'
+    );
 
 async function startMusic() {
 
@@ -318,7 +426,9 @@ async function enterArchive() {
 
     await startMusic();
 
-    overlay.classList.add('hidden');
+    overlay.classList.add(
+        'hidden'
+    );
 
     setTimeout(() => {
 
@@ -344,20 +454,25 @@ if (hasEntered) {
 }
 
 // Browser back button / page cache
-window.addEventListener('pageshow', () => {
+window.addEventListener(
+    'pageshow',
+    () => {
 
-    if (
-        sessionStorage.getItem('archiveEntered')
-    ) {
+        if (
+            sessionStorage.getItem(
+                'archiveEntered'
+            )
+        ) {
 
-        if (overlay) {
-            overlay.remove();
+            if (overlay) {
+                overlay.remove();
+            }
+
+            startMusic();
+
         }
 
-        startMusic();
-
     }
-
-});
+);
 
 </script>
