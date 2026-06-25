@@ -82,18 +82,22 @@ if (window.archivePlayer) {
 
     player.loop = true;
 
-    const savedVolume =
-        localStorage.getItem(
-            'archiveVolume'
-        );
+const savedVolume =
+    localStorage.getItem(
+        'archiveVolume'
+    );
 
-    if (savedVolume !== null) {
+if (savedVolume !== null) {
 
-        player.volume =
-            parseFloat(savedVolume);
+    player.volume =
+        parseFloat(savedVolume);
 
-    }
+} else {
 
+    player.volume = 0.5;
+
+}
+    
     window.archivePlayer =
         player;
 
