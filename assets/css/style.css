@@ -173,6 +173,13 @@ body {
     gap: 12px;
 }
 
+.music-controls input[type="range"] {
+    width: 160px;
+    height: 30px;      /* larger hitbox */
+    cursor: pointer;
+    background: transparent;
+}
+
 .mute-button {
     background: none;
     border: none;
