@@ -178,6 +178,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 12px;
+    color: #666;
 }
 
 .volume-slider {
@@ -191,22 +192,29 @@ body {
     cursor: pointer;
 }
 
+/* Dotted track */
 .volume-slider::-webkit-slider-runnable-track {
     height: 2px;
-    background: black;
+
+    background:
+        repeating-linear-gradient(
+            to right,
+            currentColor 0px,
+            currentColor 2px,
+            transparent 2px,
+            transparent 6px
+        );
 }
 
+/* Thumb */
 .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
-    appearance: none;
 
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
 
-    margin-top: -4px;
+    margin-top: -3px;
 
     border-radius: 50%;
-    background: black;
+    background: currentColor;
 }
-
-
