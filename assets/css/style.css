@@ -180,6 +180,16 @@ body {
     background: transparent;
 }
 
+.music-controls input[type="range"]::-webkit-slider-runnable-track {
+    height: 4px;
+}
+
+.music-controls input[type="range"]::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+    margin-top: -6px;
+}
+
 .mute-button {
     background: none;
     border: none;
@@ -208,3 +218,5 @@ body {
     background: black;
 
 }
+
+
