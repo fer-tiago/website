@@ -91,7 +91,7 @@ body {
 
 .text-slice-section {
     flex: 1;
-
+    pointer-events: none;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -103,6 +103,8 @@ body {
 .text-slice-link {
     color: inherit;
     text-decoration: none;
+    pointer-events: auto;
+
 }
 
 #intro-overlay {
@@ -187,8 +189,8 @@ body {
 
     width: 120px;
     height: 20px;
-    
-    transform: rotate(-90deg);
+    color: #666;
+    transform: rotate(90deg);
 
     background: transparent;
     cursor: pointer;
@@ -197,15 +199,8 @@ body {
 /* Dotted track */
 .volume-slider::-webkit-slider-runnable-track {
     height: 2px;
+    background: black;
 
-    background:
-        repeating-linear-gradient(
-            to right,
-            currentColor 0px,
-            currentColor 2px,
-            transparent 2px,
-            transparent 6px
-        );
 }
 
 /* Thumb */
