@@ -180,7 +180,9 @@ body {
     align-items: center;
     justify-content: center;
     gap: 12px;
+    width:60%;
     color: #666;
+    pointer-events: auto;
 }
 
 .volume-slider {
@@ -188,7 +190,7 @@ body {
     appearance: none;
 
     width: 120px;
-    height: 20px;
+    height: 15%;
     color: #666;
     transform: rotate(90deg);
 
