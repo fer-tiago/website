@@ -3,7 +3,14 @@ layout: default
 ---
 
 <article class="post">
-
+    
+<button
+    class="back-button"
+    onclick="goBack()"
+>
+    ← Back
+</button>
+    
     <p class="post-title">
         {{ page.title }}
     </p>
@@ -25,12 +32,7 @@ layout: default
         {{ content }}
     </div>
     
-<button
-    class="back-button"
-    onclick="goBack()"
->
-    ← Back
-</button>
+
 
 <script>
 function goBack() {
