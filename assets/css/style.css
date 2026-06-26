@@ -173,7 +173,7 @@ body {
 }
 
 .post-body {
-    max-width: 60%;
+    width: 60%;
     margin: 4rem;
 }
 
