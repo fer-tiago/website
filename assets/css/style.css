@@ -143,10 +143,22 @@ body {
 
 .post-title {
     font-size: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    justify-content: center;
+    display: flex;
 }
 
 .post-date {
-    opacity: .5;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    justify-content: center;
+    display: flex;
+}
+
+.post-image {
+    display: flex;
+    justify-content: center;
 }
 
 .post-image img {
@@ -156,6 +168,7 @@ body {
 
 .post-body {
     max-width: 800px;
+    margin: 4rem;
 }
 
 .back-button {
