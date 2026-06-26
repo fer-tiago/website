@@ -204,7 +204,6 @@ body {
 .music-controls {
     writing-mode: horizontal-tb;
     text-orientation: initial;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -218,6 +217,7 @@ body {
     -webkit-appearance: none;
     appearance: none;
 
+    pointer-events: auto;
     width: 120px;
     height: 15%;
     color: #666;
