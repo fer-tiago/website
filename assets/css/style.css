@@ -10,6 +10,8 @@
 
 html {
     font-family: "Handjet", sans-serif;
+    margin: 0;
+    overflow: hidden;
 }
 
 body {
@@ -21,12 +23,17 @@ body {
 .gallery-grid {
     display: flex;
     height: 100vh;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
     gap: 8px;
-    overflow: hidden;
+
+    width: max-content;
 }
 
 .image-slice {
-    width: 80px;
+    flex: 0 0 80px;
     overflow: hidden;
     position: relative;
 }
@@ -40,7 +47,7 @@ body {
     width: auto;
 }
 .text-slice {
-    width: 80px;
+    flex: 0 0 80px;
     background: white;
 
     display: flex;
