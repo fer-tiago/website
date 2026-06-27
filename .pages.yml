@@ -26,8 +26,8 @@ content:
         list: true
 
       - name: cover_image
-        label: Cover Image
-        type: image
+        label: Cover Image URL
+        type: string
         required: true
 
       - name: body
