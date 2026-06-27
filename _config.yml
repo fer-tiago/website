@@ -1,4 +1,4 @@
-baseurl: "/website"
+baseurl: ""
 collections:
   slices:
     output: false
