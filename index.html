@@ -358,30 +358,6 @@ const volumeSlider =
     );
 
 
-
-if (volumeSlider) {
-
-    volumeSlider.value =
-        player.volume * 100;
-
-    volumeSlider.addEventListener(
-        'input',
-        () => {
-
-            player.volume =
-                volumeSlider.value / 100;
-
-            localStorage.setItem(
-                'archiveVolume',
-                player.volume
-            );
-
-        }
-    );
-
-}
-
-
 // ----------------------------------------
 // INTRO OVERLAY
 // ----------------------------------------
@@ -394,12 +370,33 @@ const hasEntered =
         'archiveEntered'
     );
 
+function enableHorizontalScroll() {
+
+    gallery.addEventListener(
+        'wheel',
+        (event) => {
+
+            event.preventDefault();
+
+            gallery.scrollLeft +=
+                event.deltaY;
+
+        },
+        { passive: false }
+    );
+
+}
+
 async function startMusic() {
 
     try {
+
         await player.play();
+
     } catch (err) {
+
         console.log(err);
+
     }
 
 }
@@ -412,6 +409,8 @@ async function enterArchive() {
     );
 
     await startMusic();
+
+    enableHorizontalScroll();
 
     overlay.classList.add(
         'hidden'
@@ -427,7 +426,11 @@ async function enterArchive() {
 
 if (hasEntered) {
 
-    overlay.remove();
+    if (overlay) {
+        overlay.remove();
+    }
+
+    enableHorizontalScroll();
 
     startMusic();
 
@@ -454,6 +457,8 @@ window.addEventListener(
             if (overlay) {
                 overlay.remove();
             }
+
+            enableHorizontalScroll();
 
             startMusic();
 
