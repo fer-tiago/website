@@ -341,6 +341,13 @@ textSlices
     .map(createTextSlice)
     .forEach(insertSlice);
 
+const gallery = document.getElementById("gallery");
+
+gallery.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    gallery.scrollLeft += e.deltaY;
+}, { passive: false });
+
 // ----------------------------------------
 // PLAYER CONTROLS
 // ----------------------------------------
