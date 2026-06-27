@@ -350,10 +350,7 @@ const volumeSlider =
         'volumeSlider'
     );
 
-const muteButton =
-    document.getElementById(
-        'muteButton'
-    );
+
 
 if (volumeSlider) {
 
@@ -377,24 +374,6 @@ if (volumeSlider) {
 
 }
 
-if (muteButton) {
-
-    muteButton.addEventListener(
-        'click',
-        () => {
-
-            player.muted =
-                !player.muted;
-
-            muteButton.textContent =
-                player.muted
-                    ? 'UNMUTE'
-                    : 'MUTE';
-
-        }
-    );
-
-}
 
 // ----------------------------------------
 // INTRO OVERLAY
