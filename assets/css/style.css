@@ -220,7 +220,7 @@ body {
     pointer-events: auto;
     width: 120px;
     height: 15%;
-    color: #666;
+    color:#c6c6c6;
     transform: rotate(90deg);
 
     background: transparent;
@@ -230,6 +230,7 @@ body {
 .volume-slider::-webkit-slider-runnable-track {
     height: 1px;
     background: black;
+    color:#c6c6c6;
 
 }
 
@@ -244,4 +245,6 @@ body {
 
     border-radius: 50%;
     background: currentColor;
+
+    color:#c6c6c6;
 }
