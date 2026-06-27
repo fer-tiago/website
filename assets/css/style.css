@@ -28,17 +28,17 @@ body {
 .image-slice {
     width: 80px;
     overflow: hidden;
-    flex-shrink: 0;
+    position: relative;
 }
 
 .image-slice img {
-    min-height: 100%;
-    width:auto;
-    display: block;
-    object-fit: cover;
-    object-position: 50% 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    width: auto;
 }
-
 .text-slice {
     width: 80px;
     background: white;
