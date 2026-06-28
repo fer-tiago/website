@@ -11,12 +11,15 @@
 html {
     font-family: "Handjet", sans-serif;
     margin: 0;
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: auto;
+
 }
 
 body {
     margin: 0;
     overflow-y: hidden;
+    overflow-x: auto;
 }
 
 
