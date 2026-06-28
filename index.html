@@ -391,20 +391,25 @@ const hasEntered =
     );
 
 function enableHorizontalScroll() {
+    let target = gallery.scrollLeft;
+    let current = gallery.scrollLeft;
 
     gallery.addEventListener(
         'wheel',
         (event) => {
-
             event.preventDefault();
-
-            gallery.scrollLeft +=
-                event.deltaY;
-
+            target += event.deltaY;
         },
         { passive: false }
     );
 
+    function animate() {
+        current += (target - current) * 0.12; // smoothing factor
+        gallery.scrollLeft = current;
+        requestAnimationFrame(animate);
+    }
+
+    animate();
 }
 
 async function startMusic() {
