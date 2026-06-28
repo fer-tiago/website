@@ -8,23 +8,17 @@
     font-weight: 250;
 }
 
-html {
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
     font-family: "Handjet", sans-serif;
-    margin: 0;
-    overflow-y: hidden;
-    overflow-x: auto;
-
-}
-
-body {
-    margin: 0;
-    overflow-y: hidden;
-    overflow-x: auto;
 }
 
 
 .gallery-grid {
     display: flex;
+    flex-wrap: nowrap; 
     height: 100vh;
 
     overflow-x: auto;
@@ -32,11 +26,12 @@ body {
 
     gap: 8px;
 
-    width: max-content;
+    width: 100vw; 
 }
 
 .image-slice {
     flex: 0 0 80px;
+    height: 100vh;
     overflow: hidden;
     position: relative;
 }
@@ -49,9 +44,11 @@ body {
     height: 100%;
     width: auto;
 }
+
 .text-slice {
     flex: 0 0 80px;
     background: white;
+    height: 100vh;
 
     display: flex;
     align-items: center;
