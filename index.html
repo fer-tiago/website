@@ -391,30 +391,18 @@ const hasEntered =
     );
 
 function enableHorizontalScroll() {
-    let target = gallery.scrollLeft;
-    let current = gallery.scrollLeft;
-    let velocity = 0;
-    let raf;
 
-    gallery.addEventListener('wheel', (event) => {
-        event.preventDefault();
+    gallery.addEventListener(
+        'wheel',
+        (event) => {
 
-        velocity += event.deltaY * 0.5;
+            event.preventDefault();
 
-        if (!raf) animate();
+            gallery.scrollLeft +=
+                event.deltaY;
+
     }, { passive: false });
 
-    function animate() {
-        velocity *= 0.85; // friction
-        current += velocity;
-        gallery.scrollLeft = current;
-
-        if (Math.abs(velocity) > 0.5) {
-            raf = requestAnimationFrame(animate);
-        } else {
-            raf = null;
-        }
-    }
 }
 
 async function startMusic() {
