@@ -58,54 +58,49 @@ const tracks = [
 let player;
 let currentTrack;
 
-if (window.archivePlayer) {
+// Helper to detect page refresh
+function isPageRefresh() {
+    if (performance.navigation) {
+        return performance.navigation.type === 1;
+    }
+    if (performance.getEntriesByType) {
+        const navEntries = performance.getEntriesByType('navigation');
+        return navEntries.length > 0 && navEntries[0].type === 'reload';
+    }
+    return false;
+}
 
-    player =
-        window.archivePlayer;
+// Get or pick track
+const savedTrackIndex = sessionStorage.getItem('currentTrackIndex');
 
-    currentTrack =
-        window.archiveTrack;
-
+if (savedTrackIndex !== null && !isPageRefresh()) {
+    // Navigating within site — keep same track
+    currentTrack = tracks[savedTrackIndex];
 } else {
+    // First visit or refresh — pick random
+    const randomIndex = Math.floor(Math.random() * tracks.length);
+    currentTrack = tracks[randomIndex];
+    sessionStorage.setItem('currentTrackIndex', randomIndex);
+}
 
-    currentTrack =
-        tracks[
-            Math.floor(
-                Math.random() *
-                tracks.length
-            )
-        ];
-
-    player =
-        new Audio(
-            currentTrack.file
-        );
-
+// Create or reuse player
+if (window.archivePlayer && window.archiveTrack && window.archiveTrack.file === currentTrack.file) {
+    player = window.archivePlayer;
+} else {
+    player = new Audio(currentTrack.file);
     player.loop = true;
 
-const savedVolume =
-    localStorage.getItem(
-        'archiveVolume'
-    );
+    const savedVolume = localStorage.getItem('archiveVolume');
+    if (savedVolume !== null) {
+        player.volume = parseFloat(savedVolume);
+    } else {
+        player.volume = 0.2;
+    }
 
-if (savedVolume !== null) {
-
-    player.volume =
-        parseFloat(savedVolume);
-
-} else {
-
-    player.volume = 0.2;
-
+    window.archivePlayer = player;
 }
-    
-    window.archivePlayer =
-        player;
 
-    window.archiveTrack =
-        currentTrack;
-
-}
+window.archiveTrack = currentTrack;
 
 // ----------------------------------------
 // TAG FILTERING
