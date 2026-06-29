@@ -283,5 +283,7 @@ html, body {
     padding: 0;
     cursor: pointer;
     color: inherit;
-    rotate: 90deg;
+    writing-mode: vertical-rl;
+    font-size: 20px;
+    font-weight: 600;
 }
