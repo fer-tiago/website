@@ -226,15 +226,13 @@ html, body {
 }
 
 .volume-slider {
-  /* Standard vertical slider (overrides any parent writing-mode) */
   writing-mode: vertical-lr;
-  direction: rtl;
+  direction: ltr;
 
-  /* Physical dimensions */
-  width: 20px;        /* thickness – enough to grab comfortably */
-  height: 120px;      /* length of the track */
+ 
+  width: 20px;       
+  height: 120px;      
 
-  /* Reset browser styling */
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
@@ -244,15 +242,13 @@ html, body {
   margin: 0;
 }
 
-/* Track – a thin vertical line */
 .volume-slider::-webkit-slider-runnable-track {
-  width: 1px;         /* thickness */
-  height: 100%;       /* fill the 120px length */
+  width: 1px;       
+  height: 100%;       
   background: black;
   border: none;
 }
 
-/* Thumb – 8px circle centred on the 1px track */
 .volume-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -261,13 +257,10 @@ html, body {
   border-radius: 50%;
   background: currentColor;
   border: none;
-
-  /* Centre horizontally: half of (thumb width - track width) */
   margin-left: -3.5px;
-  margin-top: 0;      /* not needed for vertical slider */
+  margin-top: 0;     
 }
 
-/* Firefox */
 .volume-slider::-moz-range-track {
   width: 1px;
   height: 100%;
