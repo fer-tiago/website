@@ -260,4 +260,14 @@ html, body {
     background: currentColor;
 
     color:#c6c6c6;
+
+}
+
+.music-button {
+    font: inherit;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    color: inherit;
 }
