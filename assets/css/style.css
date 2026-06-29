@@ -283,4 +283,5 @@ html, body {
     padding: 0;
     cursor: pointer;
     color: inherit;
+    rotate: 90deg;
 }
