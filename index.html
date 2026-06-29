@@ -256,7 +256,9 @@ if (data.isPlayer) {
         </div>
         
         <div class="text-slice-section music-controls">
-
+        
+        <button class="music-button" id="playPauseButton">PAUSE</button>
+        
             <input
                 type="range"
                 min="0"
@@ -371,7 +373,34 @@ if (volumeSlider) {
     );
 
 }
+    
+const playPauseButton =
+    document.getElementById('playPauseButton');
 
+function updatePlayPauseButton() {
+    playPauseButton.textContent =
+        player.paused ? 'PLAY' : 'PAUSE';
+}
+
+if (playPauseButton) {
+
+    updatePlayPauseButton();
+
+    playPauseButton.addEventListener('click', async () => {
+
+        if (player.paused) {
+            await player.play();
+        } else {
+            player.pause();
+        }
+
+        updatePlayPauseButton();
+
+    });
+
+    player.addEventListener('play', updatePlayPauseButton);
+    player.addEventListener('pause', updatePlayPauseButton);
+}
 
 // ----------------------------------------
 // INTRO OVERLAY
