@@ -14,7 +14,7 @@ body {
 
 <div id="intro-overlay">
     <div id="intro-message">
-        CLICK TO ENTER
+        click to enter
     </div>
 </div>
 
@@ -378,8 +378,7 @@ const playPauseButton =
     document.getElementById('playPauseButton');
 
 function updatePlayPauseButton() {
-    playPauseButton.textContent =
-        player.paused ? 'PLAY' : 'PAUSE';
+    playPauseButton.innerHTML = player.paused ? '▶' : '⏸'; // or '▶' and '⏸'
 }
 
 if (playPauseButton) {
