@@ -215,7 +215,6 @@ html, body {
 
 
 .music-controls {
-    writing-mode: horizontal-tb;
     text-orientation: initial;
     display: flex;
     align-items: center;
@@ -231,17 +230,16 @@ html, body {
     appearance: none;
 
     pointer-events: auto;
-    width: 120px;
-    height: 15%;
+    width: 15%;
+    height: 120px;
     color:#c6c6c6;
-    transform: rotate(90deg);
 
     background: transparent;
     cursor: pointer;
 }
 
 .volume-slider::-webkit-slider-runnable-track {
-    height: 1px;
+    width:1px;
     background: black;
     color:#c6c6c6;
 
