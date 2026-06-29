@@ -226,39 +226,61 @@ html, body {
 }
 
 .volume-slider {
-    -webkit-appearance: none;
-    appearance: none;
+  /* Standard vertical slider (overrides any parent writing-mode) */
+  writing-mode: vertical-lr;
+  direction: rtl;
 
-    pointer-events: auto;
-    width: 100%;
-    height: 120px;
-    color:#c6c6c6;
+  /* Physical dimensions */
+  width: 20px;        /* thickness – enough to grab comfortably */
+  height: 120px;      /* length of the track */
 
-    background: transparent;
-    cursor: pointer;
+  /* Reset browser styling */
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  color: #c6c6c6;
+  pointer-events: auto;
+  margin: 0;
 }
 
+/* Track – a thin vertical line */
 .volume-slider::-webkit-slider-runnable-track {
-    width:1px;
-    background: black;
-    color:#c6c6c6;
-
+  width: 1px;         /* thickness */
+  height: 100%;       /* fill the 120px length */
+  background: black;
+  border: none;
 }
 
-/* Thumb */
+/* Thumb – 8px circle centred on the 1px track */
 .volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  border: none;
 
-    width: 8px;
-    height: 8px;
-margin-top: -3.5px;
+  /* Centre horizontally: half of (thumb width - track width) */
+  margin-left: -3.5px;
+  margin-top: 0;      /* not needed for vertical slider */
+}
 
+/* Firefox */
+.volume-slider::-moz-range-track {
+  width: 1px;
+  height: 100%;
+  background: black;
+  border: none;
+}
 
-    border-radius: 50%;
-    background: currentColor;
-
-    color:#c6c6c6;
-
+.volume-slider::-moz-range-thumb {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  border: none;
 }
 
 .music-button {
