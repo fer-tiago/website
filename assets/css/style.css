@@ -336,19 +336,13 @@ font-weight: 600;
 }
 
 .music-button {
-    font: inherit;
     border: none;
     background: none;
     padding: 0;
     cursor: pointer;
     color: inherit;
     writing-mode: vertical-rl;
-    color: #666;
     text-decoration: none;
-    font-size: 20px;
     letter-spacing: 1px;
-    padding: 10px;
-    width: 50px;
-    height: 30px;
-    font-weight:250;
+
 }
