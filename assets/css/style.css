@@ -140,7 +140,7 @@ html, body {
     gap: 10px;
     
     z-index: 99999;
-    cursor: crosshair;
+    cursor: default;
 
     transition:
         opacity 1s ease,
