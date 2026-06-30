@@ -149,13 +149,13 @@ html, body {
 }
 
 #intro-message {
-    font-size: 14px;
-    letter-spacing: 0.2em;
-    text-transform: lowercase;
+    font-size: 20px;
+    letter-spacing: 1px;
 }
 
 #music-label {
-    font-size: 12px;
+    font-size: 20px;
+    letter-spacing: 1px;
     color: #666;
     cursor: pointer;
     display: flex;
