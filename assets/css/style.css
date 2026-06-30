@@ -183,6 +183,8 @@ html, body {
 }
 
 #mute-checkbox:checked {
+    -webkit-appearance: none;
+    appearance: none;
     background: #666;
 }
 
