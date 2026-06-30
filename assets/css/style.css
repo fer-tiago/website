@@ -136,7 +136,7 @@ html, body {
     gap: 10px;
     
     z-index: 99999;
-    cursor: pointer;
+    cursor: crosshair;
 
     transition:
         opacity 1s ease,
@@ -153,6 +153,17 @@ html, body {
     letter-spacing: 1px;
 }
 
+#intro-message-click {
+    font-size: 20px;
+    letter-spacing: 1px;
+    cursor: pointer;
+
+}
+
+#intro-message-click:hover {
+font-weight: 600;
+}
+
 #music-label {
     font-size: 20px;
     letter-spacing: 1px;
@@ -163,6 +174,11 @@ html, body {
     gap: 6px;
     font-family: "Handjet", sans-serif;
 }
+
+#music-label:hover {
+font-weight: 600;
+}
+
 
 #music-checkbox {
   -webkit-appearance: none;
