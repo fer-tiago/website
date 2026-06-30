@@ -287,4 +287,7 @@ html, body {
     writing-mode: vertical-rl;
     font-size: 20px;
     font-weight: 600;
+    padding: 10px;
+    width: 50px;
+    height: 30px;
 }
