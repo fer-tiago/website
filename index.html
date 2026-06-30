@@ -407,12 +407,16 @@ if (playPauseButton) {
     
 
 
+// ----------------------------------------
+// MUSIC CHECKBOX (play if checked)
+// ----------------------------------------
+
 const musicCheckbox = document.getElementById('music-checkbox');
-const musicLabel = document.getElementById('music-label');   // ← important
+const musicLabel = document.getElementById('music-label');
 
 let musicOn = localStorage.getItem('archiveMusicOn');
 if (musicOn === null) {
-    musicOn = true;                // default: checked → music plays
+    musicOn = true;                 // default: checked → music plays
 } else {
     musicOn = (musicOn === 'true');
 }
@@ -420,20 +424,30 @@ if (musicOn === null) {
 if (musicCheckbox) {
     musicCheckbox.checked = musicOn;
 
-    // Listen for changes (triggered by label click, checkbox click, etc.)
+    // change event fires whether you click the label, the box, or use keyboard
     musicCheckbox.addEventListener('change', () => {
         musicOn = musicCheckbox.checked;
         localStorage.setItem('archiveMusicOn', musicOn);
     });
 }
 
-// Stop any click on the label from reaching the overlay
+// Prevent label clicks from closing the overlay
 if (musicLabel) {
     musicLabel.addEventListener('click', (e) => {
         e.stopPropagation();
     });
 }
 
+// 👇 THIS is the missing function you need
+async function startMusicIfAllowed() {
+    if (musicOn) {
+        try {
+            await player.play();
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
 
 // ----------------------------------------
 // INTRO OVERLAY
