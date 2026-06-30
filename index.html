@@ -43,8 +43,10 @@ body {
 
 <script>
 
+<script>
+
 // ----------------------------------------
-// MUSIC – TRACK SELECTION & PLAYER
+// MUSIC
 // ----------------------------------------
 
 const tracks = [
@@ -62,6 +64,7 @@ const tracks = [
 let player;
 let currentTrack;
 
+// Helper to detect page refresh
 function isPageRefresh() {
     if (performance.navigation) {
         return performance.navigation.type === 1;
@@ -77,8 +80,10 @@ function isPageRefresh() {
 const savedTrackIndex = sessionStorage.getItem('currentTrackIndex');
 
 if (savedTrackIndex !== null && !isPageRefresh()) {
+    // Navigating within site — keep same track
     currentTrack = tracks[savedTrackIndex];
 } else {
+    // First visit or refresh — pick random
     const randomIndex = Math.floor(Math.random() * tracks.length);
     currentTrack = tracks[randomIndex];
     sessionStorage.setItem('currentTrackIndex', randomIndex);
@@ -107,33 +112,74 @@ window.archiveTrack = currentTrack;
 // TAG FILTERING
 // ----------------------------------------
 
-let activeTag = new URLSearchParams(window.location.search).get('tag') || 'design';
+let activeTag =
+    new URLSearchParams(window.location.search)
+        .get('tag') || 'design';
 
 function applyTag(tag) {
+
     activeTag = tag;
-    document.querySelectorAll('.image-slice').forEach(post => {
-        const tags = (post.dataset.tags || '').split(',').map(t => t.trim().toLowerCase());
-        post.style.display = tags.includes(tag.toLowerCase()) ? '' : 'none';
-    });
+
+    document
+        .querySelectorAll('.image-slice')
+        .forEach(post => {
+
+            const tags = (post.dataset.tags || '')
+                .split(',')
+                .map(t => t.trim().toLowerCase());
+
+            post.style.display =
+                tags.includes(tag.toLowerCase())
+                    ? ''
+                    : 'none';
+
+        });
+
 }
 
 applyTag(activeTag);
 
-// Intercept tag links
+// ----------------------------------------
+// INTERCEPT TAG LINKS
+// ----------------------------------------
+
 document.addEventListener('click', event => {
-    const link = event.target.closest('a');
+
+    const link =
+        event.target.closest('a');
+
     if (!link) return;
-    const href = link.getAttribute('href');
-    if (!href || !href.startsWith('?tag=')) return;
+
+    const href =
+        link.getAttribute('href');
+
+    if (!href) return;
+
+    if (!href.startsWith('?tag=')) return;
+
     event.preventDefault();
-    const tag = href.replace('?tag=', '');
-    history.pushState({}, '', '?tag=' + tag);
+
+    const tag =
+        href.replace('?tag=', '');
+
+    history.pushState(
+        {},
+        '',
+        '?tag=' + tag
+    );
+
     applyTag(tag);
+
 });
 
 window.addEventListener('popstate', () => {
-    const tag = new URLSearchParams(window.location.search).get('tag') || 'design';
+
+    const tag =
+        new URLSearchParams(window.location.search)
+            .get('tag') || 'design';
+
     applyTag(tag);
+
 });
 
 // ----------------------------------------
@@ -141,128 +187,236 @@ window.addEventListener('popstate', () => {
 // ----------------------------------------
 
 const textSlices = [
-    {
-        isPlayer: true,
-        trackText: currentTrack.title + ' — ' + currentTrack.artist,
-        side: 'left'
-    },
+
+   {
+    isPlayer: true,
+
+    trackText:
+        currentTrack.title +
+        ' — ' +
+        currentTrack.artist,
+
+    side: 'left'
+},
+
     {% for slice in site.slices %}
     {
         topText: {{ slice.top_text | default: "" | jsonify }},
         topLink: {{ slice.top_link | default: "" | jsonify }},
+
         middleText: {{ slice.middle_text | default: "" | jsonify }},
         middleLink: {{ slice.middle_link | default: "" | jsonify }},
+
         bottomText: {{ slice.bottom_text | default: "" | jsonify }},
         bottomLink: {{ slice.bottom_link | default: "" | jsonify }},
+
         side: {{ slice.side | default: "right" | jsonify }}
     },
     {% endfor %}
+
 ];
 
 // ----------------------------------------
 // TEXT SLICE HELPERS
 // ----------------------------------------
 
-const gallery = document.getElementById('gallery');
-const occupiedPositions = new Set();
+const gallery =
+    document.getElementById('gallery');
+
+const occupiedPositions =
+    new Set();
 
 function createSection(text, link = '') {
+
     if (!text) return '';
+
     return `
         <div class="text-slice-section">
-            ${link ? `<a href="${link}" class="text-slice-link">${text}</a>` : text}
+            ${
+                link
+                    ? `<a href="${link}" class="text-slice-link">${text}</a>`
+                    : text
+            }
         </div>
     `;
 }
 
 function createTextSlice(data) {
-    const element = document.createElement('div');
-    element.className = `text-slice ${data.side || 'right'}`;
 
-    if (data.isPlayer) {
-        element.innerHTML = `
-            <div class="text-slice-section">now playing</div>
-            <div class="text-slice-section">${data.trackText}</div>
-            <div class="text-slice-section music-controls">
-                <button class="music-button" id="playPauseButton">PAUSE</button>
-                <input type="range" min="0" max="100" value="100" class="volume-slider" id="volumeSlider">
-            </div>
-        `;
-    } else {
+    const element =
+        document.createElement('div');
+
+    element.className =
+        `text-slice ${data.side || 'right'}`;
+
+if (data.isPlayer) {
+
+    element.innerHTML = `
+    
+        <div class="text-slice-section">
+        now playing
+        </div>
+
+        <div class="text-slice-section">
+        ${data.trackText}
+        </div>
+        
+        <div class="text-slice-section music-controls">
+        
+        <button class="music-button" id="playPauseButton">PAUSE</button>
+        
+            <input
+                type="range"
+                min="0"
+                max="100"
+                value="100"
+                class="volume-slider"
+                id="volumeSlider"
+            >
+
+        </div>
+
+
+
+
+    `;
+
+} 
+
+else {
+
         element.innerHTML =
             createSection(data.topText, data.topLink) +
             createSection(data.middleText, data.middleLink) +
             createSection(data.bottomText, data.bottomLink);
+
     }
 
     return element;
 }
 
 function randomPosition() {
-    const max = Math.min(14, gallery.children.length);
+
+    const max =
+        Math.min(14, gallery.children.length);
+
     let position;
+
     do {
-        position = Math.floor(Math.random() * max) + 1;
-    } while (occupiedPositions.has(position) && occupiedPositions.size < max);
+
+        position =
+            Math.floor(Math.random() * max) + 1;
+
+    } while (
+        occupiedPositions.has(position) &&
+        occupiedPositions.size < max
+    );
+
     occupiedPositions.add(position);
+
     return position;
 }
 
 function insertSlice(element) {
-    const position = randomPosition();
+
+    const position =
+        randomPosition();
+
     if (gallery.children[position]) {
-        gallery.insertBefore(element, gallery.children[position]);
+
+        gallery.insertBefore(
+            element,
+            gallery.children[position]
+        );
+
     } else {
+
         gallery.appendChild(element);
+
     }
+
 }
 
-textSlices.map(createTextSlice).forEach(insertSlice);
-
 // ----------------------------------------
-// PLAYER CONTROLS (volume & play/pause)
+// BUILD SLICES
 // ----------------------------------------
 
-const volumeSlider = document.getElementById('volumeSlider');
+textSlices
+    .map(createTextSlice)
+    .forEach(insertSlice);
+
+
+
+// ----------------------------------------
+// PLAYER CONTROLS
+// ----------------------------------------
+
+const volumeSlider =
+    document.getElementById(
+        'volumeSlider'
+    );
+
+
+
 if (volumeSlider) {
-    volumeSlider.value = player.volume * 100;
-    volumeSlider.addEventListener('input', () => {
-        player.volume = volumeSlider.value / 100;
-        localStorage.setItem('archiveVolume', player.volume);
-    });
+
+    volumeSlider.value =
+        player.volume * 100;
+
+    volumeSlider.addEventListener(
+        'input',
+        () => {
+
+            player.volume =
+                volumeSlider.value / 100;
+
+            localStorage.setItem(
+                'archiveVolume',
+                player.volume
+            );
+
+        }
+    );
+
 }
 
-const playPauseButton = document.getElementById('playPauseButton');
+const playPauseButton =
+    document.getElementById('playPauseButton');
+
 function updatePlayPauseButton() {
-    if (playPauseButton) {
-        playPauseButton.textContent = player.paused ? 'PLAY' : 'PAUSE';
-    }
+    playPauseButton.innerHTML = player.paused ? 'V' : '═';
 }
 
 if (playPauseButton) {
+
     updatePlayPauseButton();
+
     playPauseButton.addEventListener('click', async () => {
+
         if (player.paused) {
             await player.play();
         } else {
             player.pause();
         }
+
         updatePlayPauseButton();
+
     });
+
     player.addEventListener('play', updatePlayPauseButton);
     player.addEventListener('pause', updatePlayPauseButton);
 }
-
+    
 // ----------------------------------------
-// MUSIC CHECKBOX ("music?")
+// MUSIC CHECKBOX (play if checked)
 // ----------------------------------------
 
 const musicCheckbox = document.getElementById('music-checkbox');
 
-// Load saved preference – default to true (music plays)
+// Load saved preference – default to true (music on)
 let musicOn = localStorage.getItem('archiveMusicOn');
 if (musicOn === null) {
-    musicOn = true;
+    musicOn = true;                   // first visit → checked
 } else {
     musicOn = (musicOn === 'true');
 }
@@ -270,8 +424,9 @@ if (musicOn === null) {
 if (musicCheckbox) {
     musicCheckbox.checked = musicOn;
 
+    // Update preference on click (don't enter the archive)
     musicCheckbox.addEventListener('click', (e) => {
-        e.stopPropagation();                // don't enter the archive
+        e.stopPropagation();
         musicOn = musicCheckbox.checked;
         localStorage.setItem('archiveMusicOn', musicOn);
     });
@@ -291,40 +446,96 @@ async function startMusicIfAllowed() {
 // INTRO OVERLAY
 // ----------------------------------------
 
-const overlay = document.getElementById('intro-overlay');
-const hasEntered = sessionStorage.getItem('archiveEntered');
+const overlay =
+    document.getElementById('intro-overlay');
+
+const hasEntered =
+    sessionStorage.getItem(
+        'archiveEntered'
+    );
 
 function enableHorizontalScroll() {
-    gallery.addEventListener('wheel', (event) => {
-        event.preventDefault();
-        gallery.scrollLeft += event.deltaY;
+
+    gallery.addEventListener(
+        'wheel',
+        (event) => {
+
+            event.preventDefault();
+
+            gallery.scrollLeft +=
+                event.deltaY;
+
     }, { passive: false });
+
 }
 
 async function enterArchive() {
-    sessionStorage.setItem('archiveEntered', 'true');
-    await startMusicIfAllowed();            // respects the checkbox
+
+    sessionStorage.setItem(
+        'archiveEntered',
+        'true'
+    );
+
+    await startMusicIfAllowed();
+
     enableHorizontalScroll();
-    overlay.classList.add('hidden');
-    setTimeout(() => overlay.remove(), 1200);
+
+    overlay.classList.add(
+        'hidden'
+    );
+
+    setTimeout(() => {
+
+        overlay.remove();
+
+    }, 1200);
+
 }
 
 if (hasEntered) {
-    if (overlay) overlay.remove();
+
+    if (overlay) {
+        overlay.remove();
+    }
+
     enableHorizontalScroll();
+
     startMusicIfAllowed();
+
 } else {
-    overlay.addEventListener('click', enterArchive);
+
+    overlay.addEventListener(
+        'click',
+        enterArchive
+    );
+
 }
 
-// Handle browser back/forward cache
-window.addEventListener('pageshow', () => {
-    if (sessionStorage.getItem('archiveEntered')) {
-        if (overlay) overlay.remove();
-        enableHorizontalScroll();
-        startMusicIfAllowed();
+// Browser back button / page cache
+window.addEventListener(
+    'pageshow',
+    () => {
+
+        if (
+            sessionStorage.getItem(
+                'archiveEntered'
+            )
+        ) {
+
+            if (overlay) {
+                overlay.remove();
+            }
+
+            enableHorizontalScroll();
+
+            startMusicIfAllowed();
+
+        }
+
     }
-});
+);
+
+</script>
 
     
     
