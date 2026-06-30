@@ -89,7 +89,8 @@ html, body {
 }
 
 .text-slice-link:hover {
-    text-decoration: underline 2px;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
     color: black;
 }
 .text-slice {
