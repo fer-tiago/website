@@ -344,5 +344,6 @@ font-weight: 600;
     writing-mode: vertical-rl;
     text-decoration: none;
     letter-spacing: 1px;
+    rotate: 180deg;
 
 }
