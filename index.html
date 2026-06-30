@@ -16,6 +16,10 @@ body {
     <div id="intro-message">
         click to enter
     </div>
+    <label id="mute-label">
+    <input type="checkbox" id="mute-checkbox">
+        mute music
+    </label>
 </div>
 
 <div class="gallery-grid" id="gallery">
@@ -400,7 +404,27 @@ if (playPauseButton) {
     player.addEventListener('play', updatePlayPauseButton);
     player.addEventListener('pause', updatePlayPauseButton);
 }
+    
+// ----------------------------------------
+// MUTE CHECKBOX
+// ----------------------------------------
 
+const muteCheckbox = document.getElementById('mute-checkbox');
+
+if (muteCheckbox) {
+    // Load saved mute preference
+    const savedMute = localStorage.getItem('archiveMuted') === 'true';
+    player.muted = savedMute;
+    muteCheckbox.checked = savedMute;
+
+    // Update player when checkbox changes
+    muteCheckbox.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent entering the archive
+        player.muted = muteCheckbox.checked;
+        localStorage.setItem('archiveMuted', player.muted);
+    });
+}
+    
 // ----------------------------------------
 // INTRO OVERLAY
 // ----------------------------------------
