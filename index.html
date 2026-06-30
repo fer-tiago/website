@@ -382,7 +382,7 @@ const playPauseButton =
     document.getElementById('playPauseButton');
 
 function updatePlayPauseButton() {
-    playPauseButton.innerHTML = player.paused ? 'play' : '═';
+    playPauseButton.innerHTML = player.paused ? '▶' : '⏸';
 }
 
 if (playPauseButton) {
@@ -416,7 +416,7 @@ const musicLabel = document.getElementById('music-label');
 
 let musicOn = localStorage.getItem('archiveMusicOn');
 if (musicOn === null) {
-    musicOn = true;                 // default: checked → music plays
+    musicOn = true;             
 } else {
     musicOn = (musicOn === 'true');
 }
@@ -424,21 +424,18 @@ if (musicOn === null) {
 if (musicCheckbox) {
     musicCheckbox.checked = musicOn;
 
-    // change event fires whether you click the label, the box, or use keyboard
     musicCheckbox.addEventListener('change', () => {
         musicOn = musicCheckbox.checked;
         localStorage.setItem('archiveMusicOn', musicOn);
     });
 }
 
-// Prevent label clicks from closing the overlay
 if (musicLabel) {
     musicLabel.addEventListener('click', (e) => {
         e.stopPropagation();
     });
 }
 
-// 👇 THIS is the missing function you need
 async function startMusicIfAllowed() {
     if (musicOn) {
         try {
@@ -470,7 +467,7 @@ function enableHorizontalScroll() {
 async function enterArchive() {
     sessionStorage.setItem('archiveEntered', 'true');
 
-    await startMusicIfAllowed();   // ✅ now defined
+    await startMusicIfAllowed(); 
 
     enableHorizontalScroll();
 
@@ -489,7 +486,6 @@ if (hasEntered) {
     overlay.addEventListener('click', enterArchive);
 }
 
-// Browser back button / page cache
 window.addEventListener('pageshow', () => {
     if (sessionStorage.getItem('archiveEntered')) {
         if (overlay) overlay.remove();
