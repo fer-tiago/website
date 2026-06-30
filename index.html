@@ -453,94 +453,50 @@ async function startMusicIfAllowed() {
 // INTRO OVERLAY
 // ----------------------------------------
 
-const overlay =
-    document.getElementById('intro-overlay');
-
-const hasEntered =
-    sessionStorage.getItem(
-        'archiveEntered'
-    );
+const overlay = document.getElementById('intro-overlay');
+const hasEntered = sessionStorage.getItem('archiveEntered');
 
 function enableHorizontalScroll() {
-
     gallery.addEventListener(
         'wheel',
         (event) => {
-
             event.preventDefault();
-
-            gallery.scrollLeft +=
-                event.deltaY;
-
-    }, { passive: false });
-
+            gallery.scrollLeft += event.deltaY;
+        },
+        { passive: false }
+    );
 }
 
 async function enterArchive() {
+    sessionStorage.setItem('archiveEntered', 'true');
 
-    sessionStorage.setItem(
-        'archiveEntered',
-        'true'
-    );
-
-    await startMusicIfAllowed();
+    await startMusicIfAllowed();   // ✅ now defined
 
     enableHorizontalScroll();
 
-    overlay.classList.add(
-        'hidden'
-    );
+    overlay.classList.add('hidden');
 
     setTimeout(() => {
-
         overlay.remove();
-
     }, 1200);
-
 }
 
 if (hasEntered) {
-
-    if (overlay) {
-        overlay.remove();
-    }
-
+    if (overlay) overlay.remove();
     enableHorizontalScroll();
-
     startMusicIfAllowed();
-
 } else {
-
-    overlay.addEventListener(
-        'click',
-        enterArchive
-    );
-
+    overlay.addEventListener('click', enterArchive);
 }
 
 // Browser back button / page cache
-window.addEventListener(
-    'pageshow',
-    () => {
-
-        if (
-            sessionStorage.getItem(
-                'archiveEntered'
-            )
-        ) {
-
-            if (overlay) {
-                overlay.remove();
-            }
-
-            enableHorizontalScroll();
-
-            startMusicIfAllowed();
-
-        }
-
+window.addEventListener('pageshow', () => {
+    if (sessionStorage.getItem('archiveEntered')) {
+        if (overlay) overlay.remove();
+        enableHorizontalScroll();
+        startMusicIfAllowed();
     }
-);
+});
 
 </script>
 
