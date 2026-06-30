@@ -152,19 +152,15 @@ html, body {
     visibility: hidden;
 }
 
-#intro-message {
-    font-size: 20px;
-    letter-spacing: 1px;
-}
 
-#intro-message-click {
+#intro-message {
     font-size: 20px;
     letter-spacing: 1px;
     cursor: pointer;
 
 }
 
-#intro-message-click:hover {
+#intro-message:hover {
 font-weight: 600;
 }
 
