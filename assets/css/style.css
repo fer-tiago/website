@@ -169,24 +169,33 @@ html, body {
     font-family: "Handjet", sans-serif;
 }
 
-#mute-checkbox {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 12px;
-    height: 12px;
-    border: 1px solid #666;
-    background: transparent;
-    cursor: pointer;
-    margin: 0;
-    position: relative;
-    transition: background 0.2s;
+#music-checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  width: 12px;
+  height: 12px;
+  border: 1px solid #666;
+  background: transparent;
+  cursor: pointer;
+  margin: 0;
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#mute-checkbox:checked {
-    -webkit-appearance: none;
-    appearance: none;
-    background: #666;
+#music-checkbox:checked::after {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: #666;        
+  border-radius: 0; 
 }
+
 
 .post {
     display: flex;
