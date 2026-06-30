@@ -273,7 +273,7 @@ html, body {
   cursor: pointer;
   color: #c1c1c1;
   pointer-events: auto;
-  margin: 0;
+  margin: 0; 
 }
 
 .volume-slider::-webkit-slider-runnable-track {
