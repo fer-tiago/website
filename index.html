@@ -405,16 +405,14 @@ if (playPauseButton) {
     player.addEventListener('pause', updatePlayPauseButton);
 }
     
-// ----------------------------------------
-// MUSIC CHECKBOX (play if checked)
-// ----------------------------------------
+
 
 const musicCheckbox = document.getElementById('music-checkbox');
+const musicLabel = document.getElementById('music-label');   // ← important
 
-// Load saved preference – default to true (music on)
 let musicOn = localStorage.getItem('archiveMusicOn');
 if (musicOn === null) {
-    musicOn = true;                   // first visit → checked
+    musicOn = true;                // default: checked → music plays
 } else {
     musicOn = (musicOn === 'true');
 }
@@ -422,23 +420,20 @@ if (musicOn === null) {
 if (musicCheckbox) {
     musicCheckbox.checked = musicOn;
 
-    // Update preference on click (don't enter the archive)
-    musicCheckbox.addEventListener('click', (e) => {
-        e.stopPropagation();
+    // Listen for changes (triggered by label click, checkbox click, etc.)
+    musicCheckbox.addEventListener('change', () => {
         musicOn = musicCheckbox.checked;
         localStorage.setItem('archiveMusicOn', musicOn);
     });
 }
 
-async function startMusicIfAllowed() {
-    if (musicOn) {
-        try {
-            await player.play();
-        } catch (err) {
-            console.log(err);
-        }
-    }
+// Stop any click on the label from reaching the overlay
+if (musicLabel) {
+    musicLabel.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
 }
+
 
 // ----------------------------------------
 // INTRO OVERLAY
