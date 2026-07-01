@@ -358,11 +358,9 @@ font-weight: 600;
   align-content: center;
   justify-content: center;
     height: 100vh;
-    cursor: pointer;
 }
 
 #message-404 {
     font-size: 20px;
     letter-spacing: 1px;
-    cursor: pointer;
 }
