@@ -164,6 +164,8 @@ html, body {
 font-weight: 600;
 }
 
+
+
 #music-label {
     font-size: 20px;
     letter-spacing: 1px;
@@ -261,7 +263,9 @@ font-weight: 600;
     font-size: 20px;
 
 }
-
+.back-button:hover {
+font-weight: 600;
+}
 
 
 .track-artist {
@@ -348,10 +352,16 @@ font-weight: 600;
 
 }
 
-.error-404 {
+#error-404 {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-content: center;
   justify-content: center;
     height: 100vh;
+}
+
+#404-message {
+    font-size: 20px;
+    letter-spacing: 1px;
+    cursor: pointer;
 }
