@@ -13,16 +13,7 @@ body {
 </style>
 
 <div 
-    id="error-404" 
-    
-    style="    
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;   
-    "
-    >
+    id="error-404">
     
     <div id="message-404">
         404
@@ -33,5 +24,23 @@ body {
 >
     ← back
 </button>
+
+    
+    <script>
+function goBack() {
+
+    if (history.length > 1) {
+
+        history.back();
+
+    } else {
+
+        window.location.href =
+            '{{ "/" | relative_url }}';
+
+    }
+
+}
+</script>
     
 </div>
