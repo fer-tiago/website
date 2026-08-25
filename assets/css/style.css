@@ -364,3 +364,49 @@ font-weight: 600;
     font-size: 20px;
     letter-spacing: 1px;
 }
+
+@media (min-width: 600px) {
+
+.volume-slider{
+    display: hidden;
+}
+
+.music-button{
+    font-size: 60px;
+}
+
+.text-slide-section{
+    font-size: 50px;
+}
+
+.text-slice.left, image-slice{
+    flex: 0 0 150px;
+}
+
+    //POST
+    
+.back-button {
+    font-size: 50px;
+}
+
+    
+.post-title {
+    font-size: 80px;
+    margin-top: 0.8rem;
+    margin-bottom: 0;
+    justify-content: center;
+    display: flex;
+}
+
+    .post-date {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+    display: flex;
+    font-size: 50px;
+}
+    .post-body {
+    width: 60%;
+    font-size: 50px;
+}
+}
