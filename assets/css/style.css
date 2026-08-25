@@ -379,8 +379,14 @@ font-weight: 600;
     font-size: 50px;
 }
 
-.text-slice.left, image-slice{
+.text-slice{
     flex: 0 0 150px;
+    font-size: 50px;
+
+}
+
+.image-slice{
+    flex: 0 0 150px:
 }
 
     //POST
