@@ -368,14 +368,14 @@ font-weight: 600;
 @media (max-width: 600px) {
 
 .volume-slider{
-    display: hidden;
+    display: none;
 }
 
 .music-button{
     font-size: 60px;
 }
 
-.text-slide-section{
+.text-slice-section{
     font-size: 50px;
 }
 
