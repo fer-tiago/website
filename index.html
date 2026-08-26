@@ -382,7 +382,26 @@ const playPauseButton =
     document.getElementById('playPauseButton');
 
 function updatePlayPauseButton() {
-    playPauseButton.innerHTML = player.paused ? '▶' : '⏸';
+    playPauseButton.innerHTML = player.paused
+        ? `
+            <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+            >
+                <polygon points="6,3 20,12 6,21" />
+            </svg>
+        `
+        : `
+            <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+            >
+                <rect x="5" y="3" width="5" height="18" />
+                <rect x="14" y="3" width="5" height="18" />
+            </svg>
+        `;
 }
 
 if (playPauseButton) {
