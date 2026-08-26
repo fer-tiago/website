@@ -416,8 +416,14 @@ font-weight: 600;
     font-size: 50px;
 }
 
-    .post-body img {
+.post-body img {
+    display: block;
+    width: auto;
     max-width: 70vw;
+    max-height: 80vh;
+
+    margin-left: 50%;
+    transform: translateX(-50%);
 }
 
 }
