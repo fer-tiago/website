@@ -353,6 +353,13 @@ font-weight: 600;
 
 }
 
+.music-button svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    display: block;
+}
+
 #error-404 {
   display: flex;
   flex-wrap: wrap;
@@ -365,6 +372,7 @@ font-weight: 600;
     font-size: 20px;
     letter-spacing: 1px;
 }
+
 
 @media (max-width: 600px) {
 
@@ -425,5 +433,8 @@ font-weight: 600;
     margin-left: 50%;
     transform: translateX(-50%);
 }
-
+.music-button svg {
+    width: 50px;
+    height: 50px;
+}
 }
