@@ -388,7 +388,11 @@ font-weight: 600;
 
 .text-slice{
     flex: 0 0 110px;
+    font-size: 25px;
+}
 
+.text-slice-section{
+    font-size: 25px;
 }
 
 .image-slice{
