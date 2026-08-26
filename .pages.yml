@@ -27,7 +27,7 @@ content:
 
       - name: cover_image
         label: Cover Image URL
-        type: image
+        type: string
         required: true
 
       - name: body
