@@ -372,21 +372,21 @@ font-weight: 600;
 }
 
 .music-button{
-    font-size: 60px;
+    font-size: 50px;
 }
 
 .text-slice-section{
-    font-size: 50px;
+    font-size: 35px;
 }
 
 .text-slice{
-    flex: 0 0 150px;
-    font-size: 50px;
+    flex: 0 0 110px;
+    font-size: 35px;
 
 }
 
 .image-slice{
-    flex: 0 0 150px;
+    flex: 0 0 110px;
 }
 
     //POST
