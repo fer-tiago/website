@@ -380,17 +380,14 @@ font-weight: 600;
     display: none;
 }
 
-.music-button{
-    font-size: 50px;
+.music-button svg {
+    width: 30px;
+    height: 30px;
 }
 
-.text-slice-section{
-    font-size: 35px;
-}
 
 .text-slice{
     flex: 0 0 110px;
-    font-size: 35px;
 
 }
 
@@ -421,7 +418,6 @@ font-weight: 600;
 }
     .post-body {
     width: 60%;
-    font-size: 30px;
 }
 
 .post-body img {
@@ -433,8 +429,5 @@ font-weight: 600;
     margin-left: 50%;
     transform: translateX(-50%);
 }
-.music-button svg {
-    width: 50px;
-    height: 50px;
-}
+
 }
