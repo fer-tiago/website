@@ -5,7 +5,7 @@ layout: null
   {% assign design_posts = site.posts | where_exp: "item", "item.tags contains 'design'" | sort: "date" %}
   {% for post in design_posts %}
   {
-    "id": {{ post.url | jsonify }},
+    "id": {{ post.url | remove: ".html" | jsonify }},
     "title": {{ post.title | jsonify }},
     "date": "{{ post.date | date: '%Y-%m-%d' }}",
     "cover_image": {{ post.cover_image | jsonify }},
