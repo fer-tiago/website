@@ -2,8 +2,14 @@
 layout: null
 ---
 [
-  {% assign design_posts = site.posts | where_exp: "item", "item.tags contains 'design'" | where_exp: "item", "item.cover_image contains '.gif' == false" | sort: "date" %}
+  {% assign design_posts = site.posts | where_exp: "item", "item.tags contains 'design'" | sort: "date" %}
+  {% assign valid_posts = "" | split: "" %}
   {% for post in design_posts %}
+    {% unless post.cover_image contains ".gif" %}
+      {% assign valid_posts = valid_posts | push: post %}
+    {% endunless %}
+  {% endfor %}
+  {% for post in valid_posts %}
   {
     "id": {{ post.url | remove: ".html" | jsonify }},
     "title": {{ post.title | jsonify }},
