@@ -2,14 +2,14 @@
 layout: null
 ---
 [
-  {% assign design_posts = site.posts | where_exp: "item", "item.tags contains 'design'" | sort: "date" %}
+  {% assign design_posts = site.posts | where_exp: "item", "item.tags contains 'design'" | where_exp: "item", "item.cover_image contains '.gif' == false" | sort: "date" %}
   {% for post in design_posts %}
   {
     "id": {{ post.url | remove: ".html" | jsonify }},
     "title": {{ post.title | jsonify }},
-    "date": "{{ post.date | date: '%Y-%m-%d' }}",
+    "date": {{ post.date | date: "%Y-%m-%d" | jsonify }},
     "cover_image": {{ post.cover_image | jsonify }},
-    "url": "{{ post.url | absolute_url }}"
+    "url": {{ post.url | absolute_url | jsonify }}
   }{% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]
