@@ -5,7 +5,7 @@ tags:
   - design
 cover_image: https://images.tiagoferreira.work/OOTCITA/dc3%20publica%C3%A7%C3%A3o%20final4.jpg
 ---
-"[Out of The Closets Into The Archives](https://images.tiagoferreira.work/OOTCITA/OOCITA.pdf) expõe alguns dos mais importantes títulos relevantes para a propagação e utilidade do design, enfatizando a notabilidade do designqueer e a urgência daí proveniente, numa escala global. Visamos criar ligações relevantes para o futuro do design de comunicação, relacionando principalmente dois tópicos importantes._
+"[Out of The Closets](https://images.tiagoferreira.work/OOTCITA/archive%20spreads.pdf) Into [The Archives](https://images.tiagoferreira.work/OOTCITA/archive%20spreads.pdf)" expõe alguns dos mais importantes títulos relevantes para a propagação e utilidade do design, enfatizando a notabilidade do designqueer e a urgência daí proveniente, numa escala global. Visamos criar ligações relevantes para o futuro do design de comunicação, relacionando principalmente dois tópicos importantes._
 
 
 
