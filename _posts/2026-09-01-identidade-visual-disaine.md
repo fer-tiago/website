@@ -5,6 +5,10 @@ tags:
   - design
 cover_image: https://images.tiagoferreira.work/disaine/DISAINE.png
 ---
+Identidade visual de uma imaginada organização ativista de design nacional (Disaine) e logótipo estilizado em Ojibwe  
+  
+
+
 ![Inspiração](https://images.tiagoferreira.work/disaine/tiagoferreiramangraf-04.png)
 
 
