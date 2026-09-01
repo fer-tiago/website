@@ -25,17 +25,21 @@ O primeiro destaca a cultura queer e a sua relação compontos como a tipografia
   
 Conhecimento em forma de artefacto. O arquivamento reforçou ao longo dos anos o esforço queer de reconhecimentoe quebra da sociedade heteronormativa, esforço retratado em publicações de Paul Soulellis como Urgent Archives (2017) e no trabalho de Audre Lorde em Your Silence Will Not Protect You (2016)." 
 
-  
+![2](https://images.tiagoferreira.work/OOTCITA/apresentacao-final-05.png)
 
 
-  ![2]([https:/images.tiagoferreira.work/OOTCITA/apresentacao-final-05.png](https:/images.tiagoferreira.work/OOTCITA/apresentacao-final-05.png))  
-![3]([https:/images.tiagoferreira.work/OOTCITA/apresentacao-final-09.png](https:/images.tiagoferreira.work/OOTCITA/apresentacao-final-09.png))
+
+![3](https://images.tiagoferreira.work/OOTCITA/apresentacao-final-09.png)
 
 Publicação impressa com dois livros: A publicação dividida em "queer" e "archive" e o arquivo. 
 
 ![6](https://images.tiagoferreira.work/OOTCITA/apresentacao-final-03.png)
 
-![5](<[https:/images.tiagoferreira.work/OOTCITA/dc3 ARQUIVO20.jpg](https:/images.tiagoferreira.work/OOTCITA/dc3 ARQUIVO20.jpg)>)  
+
+
+![5](https://images.tiagoferreira.work/OOTCITA/dc3%20ARQUIVO20.jpg)
+
+  
 Publicação realizada por Tiago Ferreira & Inês Costa    
 
 
