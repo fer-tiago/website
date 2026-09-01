@@ -246,6 +246,13 @@ font-weight: 600;
 .post-body {
     width: 60%;
     margin: 4rem;
+    display: block;
+    width: auto;
+    max-width: 70vw;
+    max-height: 80vh;
+
+    margin-left: 50%;
+    transform: translateX(-50%);
 }
 
 .back-button {
@@ -424,14 +431,5 @@ font-weight: 600;
     width: 60%;
 }
 
-.post-body img {
-    display: block;
-    width: auto;
-    max-width: 70vw;
-    max-height: 80vh;
-
-    margin-left: 50%;
-    transform: translateX(-50%);
-}
 
 }
