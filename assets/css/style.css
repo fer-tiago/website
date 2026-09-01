@@ -246,6 +246,9 @@ font-weight: 600;
 .post-body {
     width: 60%;
     margin: 4rem;
+}
+
+.post-body img {
     display: block;
     width: auto;
     max-width: 70vw;
