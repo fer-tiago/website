@@ -5,4 +5,4 @@ tags:
   - design
 cover_image: https://images.tiagoferreira.work/cs1.png
 ---
-[https://images.tiagoferreira.work/cs1.png](https://images.tiagoferreira.work/cs1.png)
+!(https://images.tiagoferreira.work/cs1.png)
