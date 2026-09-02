@@ -34,6 +34,15 @@ html, body {
     -ms-overflow-style: none;
 }
 
+.gallery-grid img {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.gallery-grid img.loaded {
+    opacity: 1;
+}
+
 .gallery-grid::-webkit-scrollbar {
     display: none;
 }
