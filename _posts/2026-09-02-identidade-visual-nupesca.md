@@ -1,11 +1,11 @@
 ---
-title: Identidade Visual NUPesca
+title: NUPesca Visual Identity
 date: 2026-05-13
 tags:
   - design
 cover_image: https://images.tiagoferreira.work/nupesca/nupesca_fixArtboard%201cards.png
 ---
-Núcleo de pesca da FCT, identidade visual baseada em um peixe-gato  
+Visual Identity for the Faculty of Science and Technology's fishing nucleus, based on a catfish
 
 ![NUPESCA](https://images.tiagoferreira.work/nupesca/2Artboard%201_11%402x.png)
 
