@@ -3,9 +3,29 @@ layout: downscroll
 title: "About Me"
 ---
 
+<article class="post">
+
 <button
     class="back-button"
     onclick="goBack()"
 >
     ← back
 </button>
+
+<script>
+function goBack() {
+
+    if (history.length > 1) {
+
+        history.back();
+
+    } else {
+
+        window.location.href =
+            '{{ "/" | relative_url }}';
+
+    }
+
+}
+</script>
+</article>
