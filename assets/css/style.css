@@ -257,7 +257,12 @@ font-weight: 600;
     transform: translateX(-50%);
     margin-top: 20px;
 }
-
+.post-body p {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: left;
+}
 .back-button {
     background: none;
     border: none;
@@ -431,7 +436,8 @@ font-weight: 600;
     font-size: 20px;
 }
     .post-body {
-    width: 60%;
+    width: 80%;
+    margin: 1rem;
 }
 
     .post-body img {
