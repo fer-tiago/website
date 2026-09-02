@@ -294,24 +294,20 @@ else {
 }
 
 function randomPosition() {
-
-    const max =
-        Math.min(9, gallery.children.length);
+    //Determine the maximum slots based on screen width
+    const maxLimit = window.innerWidth < 800 ? 4 : 10;
+    
+    const max = Math.min(maxLimit, gallery.children.length);
 
     let position;
-
     do {
-
-        position =
-            Math.floor(Math.random() * max) + 1;
-
+        position = Math.floor(Math.random() * max) + 1;
     } while (
         occupiedPositions.has(position) &&
         occupiedPositions.size < max
     );
 
     occupiedPositions.add(position);
-
     return position;
 }
 
