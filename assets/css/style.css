@@ -253,9 +253,8 @@ font-weight: 600;
     width: auto;
     max-width: 70vw;
     max-height: 80vh;
-    margin-left: 50%;
     transform: translateX(-50%);
-    margin-top: 20px;
+    margin: 50px 0 50px 50%;
 }
 .post-body p {
   width: fit-content;
