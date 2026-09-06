@@ -1,4 +1,6 @@
 baseurl: ""
+permalink: pretty
+
 collections:
   slices:
     output: false
