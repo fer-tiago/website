@@ -94,15 +94,6 @@ html, body {
     transform: scale(-1);
 }
 
-
-.text-slice-link {
-    color: inherit;
-    text-decoration: none;
-}
-
-.text-slice-link:hover {
-    font-weight: 600;
-}
 .text-slice {
     width: 80px;
     height: 100vh;
@@ -128,7 +119,21 @@ html, body {
     color: inherit;
     text-decoration: none;
     pointer-events: auto;
+}
 
+.text-slice-link:hover {
+    font-weight: 600;
+}
+
+/* Dim inactive links when at least one tag is selected */
+body.tags-active .text-slice-link:not(.active-tag) {
+    opacity: 0.4; 
+}
+
+/* Keep active links fully visible and bold */
+body.tags-active .text-slice-link.active-tag {
+    opacity: 1;
+    font-weight: bold;
 }
 
 #intro-overlay {
