@@ -40,37 +40,46 @@ content:
     path: _slices
 
     fields:
-      - name: top_text
-        label: Top Text
+      - name: text_1
+        label: Text 1 (Top)
         type: string
-    
-      - name: top_link
-        label: Top Link
-        type: string
-        required: false
-    
-      - name: middle_text
-        label: Middle Text
-        type: string
-    
-      - name: middle_link
-        label: Middle Link
+      
+      - name: link_1
+        label: Link 1
         type: string
         required: false
-    
-      - name: bottom_text
-        label: Bottom Text
+      
+      - name: text_2
+        label: Text 2 (Upper Middle)
         type: string
-    
-      - name: bottom_link
-        label: Bottom Link
+      
+      - name: link_2
+        label: Link 2
         type: string
         required: false
-    
+      
+      - name: text_3
+        label: Text 3 (Lower Middle)
+        type: string
+      
+      - name: link_3
+        label: Link 3
+        type: string
+        required: false
+      
+      - name: text_4
+        label: Text 4 (Bottom)
+        type: string
+      
+      - name: link_4
+        label: Link 4
+        type: string
+        required: false
+      
       - name: side
         label: Side
         type: string
-        default: right
+        default: left
 
   - name: music
     label: Music
