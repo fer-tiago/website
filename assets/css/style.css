@@ -134,15 +134,9 @@ html, body {
     font-weight: 600;
 }
 
-/* Dim inactive links when at least one tag is selected */
-body.tags-active .text-slice-link:not(.active-tag) {
-    opacity: 0.4; 
-}
 
-/* Keep active links fully visible and bold */
 body.tags-active .text-slice-link.active-tag {
-    opacity: 1;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 #intro-overlay {
