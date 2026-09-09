@@ -221,18 +221,21 @@ const textSlices = [
         currentTrack.artist,
 
     side: 'left'
-},
+   },
 
     {% for slice in site.slices %}
     {
-        topText: {{ slice.top_text | default: "" | jsonify }},
-        topLink: {{ slice.top_link | default: "" | jsonify }},
+        text1: {{ slice.text_1 | default: "" | jsonify }},
+        link1: {{ slice.link_1 | default: "" | jsonify }},
 
-        middleText: {{ slice.middle_text | default: "" | jsonify }},
-        middleLink: {{ slice.middle_link | default: "" | jsonify }},
+        text2: {{ slice.text_2 | default: "" | jsonify }},
+        link2: {{ slice.link_2 | default: "" | jsonify }},
 
-        bottomText: {{ slice.bottom_text | default: "" | jsonify }},
-        bottomLink: {{ slice.bottom_link | default: "" | jsonify }},
+        text3: {{ slice.text_3 | default: "" | jsonify }},
+        link3: {{ slice.link_3 | default: "" | jsonify }},
+
+        text4: {{ slice.text_4 | default: "" | jsonify }},
+        link4: {{ slice.link_4 | default: "" | jsonify }},
 
         side: {{ slice.side | default: "right" | jsonify }}
     },
@@ -267,53 +270,40 @@ function createSection(text, link = '') {
 
 function createTextSlice(data) {
 
-    const element =
-        document.createElement('div');
+    const element = document.createElement('div');
+    element.className = `text-slice ${data.side || 'right'}`;
 
-    element.className =
-        `text-slice ${data.side || 'right'}`;
+    if (data.isPlayer) {
+        // Original 3-part music player
+        element.innerHTML = `
+            <div class="text-slice-section">
+            now playing
+            </div>
 
-if (data.isPlayer) {
+            <div class="text-slice-section">
+            ${data.trackText}
+            </div>
 
-    element.innerHTML = `
-    
-        <div class="text-slice-section">
-        now playing
-        </div>
+            <div class="text-slice-section music-controls">
+                <button class="music-button" id="playPauseButton">PAUSE</button>
 
-        <div class="text-slice-section">
-        ${data.trackText}
-        </div>
-        
-        <div class="text-slice-section music-controls">
-        
-        <button class="music-button" id="playPauseButton">PAUSE</button>
-        
-            <input
-                type="range"
-                min="0"
-                max="100"
-                value="100"
-                class="volume-slider"
-                id="volumeSlider"
-            >
-
-        </div>
-
-
-
-
-    `;
-
-} 
-
-else {
-
+                <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="100"
+                    class="volume-slider"
+                    id="volumeSlider"
+                >
+            </div>
+        `;
+    } else {
+        // 4-part text slices
         element.innerHTML =
-            createSection(data.topText, data.topLink) +
-            createSection(data.middleText, data.middleLink) +
-            createSection(data.bottomText, data.bottomLink);
-
+            createSection(data.text1, data.link1) +
+            createSection(data.text2, data.link2) +
+            createSection(data.text3, data.link3) +
+            createSection(data.text4, data.link4);
     }
 
     return element;
