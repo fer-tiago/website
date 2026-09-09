@@ -107,20 +107,15 @@ if (window.archivePlayer && window.archiveTrack && window.archiveTrack.file === 
 window.archiveTrack = currentTrack;
 
 // ----------------------------------------
-// MULTI-TAG FILTERING & TOGGLES
+// MULTI-TAG FILTERING & TOGGLES (CLEAN URL)
 // ----------------------------------------
 
 // 1. Define your exclusive tags here (lowercase)
 const exclusiveTags = ['photography', 'hidden']; 
 
-let activeTags = [];
-
-// Parse initial tags from URL on load
-const urlParams = new URLSearchParams(window.location.search);
-const initialTags = urlParams.get('tags') || urlParams.get('tag');
-if (initialTags) {
-    activeTags = initialTags.split(',').map(t => t.trim().toLowerCase()).filter(Boolean);
-}
+// Silently load active tags from background memory instead of the URL
+const savedTags = sessionStorage.getItem('archiveActiveTags');
+let activeTags = savedTags ? JSON.parse(savedTags) : [];
 
 // 2. Helper function to apply the display changes to the DOM
 function renderGalleryChanges() {
@@ -129,11 +124,10 @@ function renderGalleryChanges() {
             .split(',')
             .map(t => t.trim().toLowerCase());
 
-        // Check if this post is tagged with an exclusive tag
         const isExclusivePost = postTags.some(tag => exclusiveTags.includes(tag));
 
         if (activeTags.length === 0) {
-            // NO TAGS SELECTED: Show all posts UNLESS it's an exclusive post
+            // NO TAGS SELECTED: Show all UNLESS it's an exclusive post
             post.style.display = isExclusivePost ? 'none' : '';
             return;
         }
@@ -163,11 +157,9 @@ function renderGalleryChanges() {
 
 // 3. Main function to trigger the layout shift (with View Transitions API)
 function applyTags() {
-    // If the browser supports View Transitions, run the cross-fade animation
     if (document.startViewTransition) {
         document.startViewTransition(() => renderGalleryChanges());
     } else {
-        // Fallback for older browsers
         renderGalleryChanges();
     }
 }
@@ -192,46 +184,28 @@ document.addEventListener('click', event => {
 
     // 4. TOGGLE LOGIC
     if (exclusiveTags.includes(clickedTag)) {
-        // If clicking an EXCLUSIVE tag:
         if (activeTags.length === 1 && activeTags[0] === clickedTag) {
-            // It's the only one active, toggle it off
             activeTags = [];
         } else {
-            // Otherwise, make it the ONLY active tag
             activeTags = [clickedTag];
         }
     } else {
-        // If clicking a REGULAR tag:
-        // Clear out any exclusive tags that might be active
         activeTags = activeTags.filter(t => !exclusiveTags.includes(t));
 
         if (activeTags.includes(clickedTag)) {
-            // If already active, toggle off
             activeTags = activeTags.filter(t => t !== clickedTag);
         } else {
-            // If not active, toggle on
             activeTags.push(clickedTag);
         }
     }
 
-    // 5. Update URL to match current state
-    if (activeTags.length === 0) {
-        history.pushState({}, '', window.location.pathname);
-    } else {
-        history.pushState({}, '', '?tags=' + activeTags.join(','));
-    }
+    // 5. Save state silently in the background (No URL changes!)
+    sessionStorage.setItem('archiveActiveTags', JSON.stringify(activeTags));
 
     // Run the animation and filter
     applyTags();
 });
-
-// Handle browser Back/Forward buttons
-window.addEventListener('popstate', () => {
-    const params = new URLSearchParams(window.location.search);
-    const tagsParam = params.get('tags') || params.get('tag');
-    activeTags = tagsParam ? tagsParam.split(',').filter(Boolean) : [];
-    applyTags();
-});
+    
 // ----------------------------------------
 // TEXT SLICES DATA
 // ----------------------------------------
