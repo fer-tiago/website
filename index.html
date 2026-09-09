@@ -107,77 +107,115 @@ if (window.archivePlayer && window.archiveTrack && window.archiveTrack.file === 
 window.archiveTrack = currentTrack;
 
 // ----------------------------------------
-// TAG FILTERING
+// MULTI-TAG FILTERING & TOGGLES
 // ----------------------------------------
 
-let activeTag =
-    new URLSearchParams(window.location.search)
-        .get('tag') || 'design';
+// 1. Define your exclusive tags here (lowercase)
+const exclusiveTags = ['photography']; 
 
-function applyTag(tag) {
+let activeTags = [];
 
-    activeTag = tag;
-
-    document
-        .querySelectorAll('.image-slice')
-        .forEach(post => {
-
-            const tags = (post.dataset.tags || '')
-                .split(',')
-                .map(t => t.trim().toLowerCase());
-
-            post.style.display =
-                tags.includes(tag.toLowerCase())
-                    ? ''
-                    : 'none';
-
-        });
-
+// Parse initial tags from URL (supports both ?tag= and ?tags=)
+const urlParams = new URLSearchParams(window.location.search);
+const initialTags = urlParams.get('tags') || urlParams.get('tag');
+if (initialTags) {
+    activeTags = initialTags.split(',').map(t => t.trim().toLowerCase()).filter(Boolean);
 }
 
-applyTag(activeTag);
+function applyTags() {
+    // A. Filter the images
+    document.querySelectorAll('.image-slice').forEach(post => {
+        if (activeTags.length === 0) {
+            post.style.display = ''; // Show all if nothing is selected
+            return;
+        }
+
+        const postTags = (post.dataset.tags || '')
+            .split(',')
+            .map(t => t.trim().toLowerCase());
+
+        // Use .some() to show items that match ANY of the active tags.
+        // (Change .some to .every if you want items to match ALL active tags)
+        const isMatch = activeTags.some(tag => postTags.includes(tag));
+        
+        post.style.display = isMatch ? '' : 'none';
+    });
+
+    // B. Update visual state of the links
+    const body = document.body;
+    if (activeTags.length > 0) {
+        body.classList.add('tags-active');
+    } else {
+        body.classList.remove('tags-active');
+    }
+
+    document.querySelectorAll('a[href^="?tag="]').forEach(link => {
+        const linkTag = link.getAttribute('href').replace('?tag=', '').toLowerCase();
+        if (activeTags.includes(linkTag)) {
+            link.classList.add('active-tag');
+        } else {
+            link.classList.remove('active-tag');
+        }
+    });
+}
+
+applyTags();
 
 // ----------------------------------------
 // INTERCEPT TAG LINKS
 // ----------------------------------------
 
 document.addEventListener('click', event => {
-
-    const link =
-        event.target.closest('a');
-
+    const link = event.target.closest('a');
     if (!link) return;
 
-    const href =
-        link.getAttribute('href');
-
-    if (!href) return;
-
-    if (!href.startsWith('?tag=')) return;
+    const href = link.getAttribute('href');
+    if (!href || !href.startsWith('?tag=')) return;
 
     event.preventDefault();
 
-    const tag =
-        href.replace('?tag=', '');
+    const clickedTag = href.replace('?tag=', '').toLowerCase();
 
-    history.pushState(
-        {},
-        '',
-        '?tag=' + tag
-    );
+    // TOGGLE LOGIC
+    if (exclusiveTags.includes(clickedTag)) {
+        // If clicking an EXCLUSIVE tag:
+        if (activeTags.length === 1 && activeTags[0] === clickedTag) {
+            // It's the only one active, toggle it off
+            activeTags = [];
+        } else {
+            // Otherwise, make it the ONLY active tag, clearing everything else
+            activeTags = [clickedTag];
+        }
+    } else {
+        // If clicking a REGULAR tag:
+        // First, clear out any exclusive tags that might be active
+        activeTags = activeTags.filter(t => !exclusiveTags.includes(t));
 
-    applyTag(tag);
+        if (activeTags.includes(clickedTag)) {
+            // If already active, toggle off
+            activeTags = activeTags.filter(t => t !== clickedTag);
+        } else {
+            // If not active, toggle on
+            activeTags.push(clickedTag);
+        }
+    }
 
+    // Update URL to match current state
+    if (activeTags.length === 0) {
+        history.pushState({}, '', window.location.pathname);
+    } else {
+        // Use ?tags= (plural) to cleanly hold comma-separated values in the URL
+        history.pushState({}, '', '?tags=' + activeTags.join(','));
+    }
+
+    applyTags();
 });
 
 window.addEventListener('popstate', () => {
-
-    const tag =
-        new URLSearchParams(window.location.search)
-            .get('tag') || 'design';
-
-    applyTag(tag);
-
+    const params = new URLSearchParams(window.location.search);
+    const tagsParam = params.get('tags') || params.get('tag');
+    activeTags = tagsParam ? tagsParam.split(',').filter(Boolean) : [];
+    applyTags();
 });
 
 // ----------------------------------------
