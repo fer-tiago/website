@@ -1,6 +1,8 @@
 ---
 title: Segunda iteração do tiagoferreira.work
 date: 2026-05-01
+tags:
+  - hidden
 cover_image: https://images.tiagoferreira.work/website/fc0ddb2583566f5129491fff44e0f0fa.png
 ---
 Segunda iteração do tiagoferreira.work, em framer.  
