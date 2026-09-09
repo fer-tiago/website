@@ -110,12 +110,12 @@ window.archiveTrack = currentTrack;
 // MULTI-TAG FILTERING & TOGGLES
 // ----------------------------------------
 
-// 1. Define your exclusive tags here (lowercase)
+// Define exclusive tags here
 const exclusiveTags = ['photography']; 
 
 let activeTags = [];
 
-// Parse initial tags from URL (supports both ?tag= and ?tags=)
+// Parse initial tags from URL
 const urlParams = new URLSearchParams(window.location.search);
 const initialTags = urlParams.get('tags') || urlParams.get('tag');
 if (initialTags) {
@@ -123,25 +123,28 @@ if (initialTags) {
 }
 
 function applyTags() {
-    // A. Filter the images
     document.querySelectorAll('.image-slice').forEach(post => {
-        if (activeTags.length === 0) {
-            post.style.display = ''; // Show all if nothing is selected
-            return;
-        }
-
         const postTags = (post.dataset.tags || '')
             .split(',')
             .map(t => t.trim().toLowerCase());
 
-        // Use .some() to show items that match ANY of the active tags.
-        // (Change .some to .every if you want items to match ALL active tags)
+        // Check if this post is tagged with an exclusive tag
+        const isExclusivePost = postTags.some(tag => exclusiveTags.includes(tag));
+
+        if (activeTags.length === 0) {
+            // NO TAGS SELECTED:
+            // Show all posts UNLESS it's an exclusive post (e.g. photography)
+            post.style.display = isExclusivePost ? 'none' : '';
+            return;
+        }
+
+        // TAGS ARE SELECTED:
+        // Show post if it matches any active tag
         const isMatch = activeTags.some(tag => postTags.includes(tag));
-        
         post.style.display = isMatch ? '' : 'none';
     });
 
-    // B. Update visual state of the links
+    // Update link visual states
     const body = document.body;
     if (activeTags.length > 0) {
         body.classList.add('tags-active');
@@ -178,33 +181,25 @@ document.addEventListener('click', event => {
 
     // TOGGLE LOGIC
     if (exclusiveTags.includes(clickedTag)) {
-        // If clicking an EXCLUSIVE tag:
         if (activeTags.length === 1 && activeTags[0] === clickedTag) {
-            // It's the only one active, toggle it off
             activeTags = [];
         } else {
-            // Otherwise, make it the ONLY active tag, clearing everything else
             activeTags = [clickedTag];
         }
     } else {
-        // If clicking a REGULAR tag:
-        // First, clear out any exclusive tags that might be active
         activeTags = activeTags.filter(t => !exclusiveTags.includes(t));
 
         if (activeTags.includes(clickedTag)) {
-            // If already active, toggle off
             activeTags = activeTags.filter(t => t !== clickedTag);
         } else {
-            // If not active, toggle on
             activeTags.push(clickedTag);
         }
     }
 
-    // Update URL to match current state
+    // Update URL
     if (activeTags.length === 0) {
         history.pushState({}, '', window.location.pathname);
     } else {
-        // Use ?tags= (plural) to cleanly hold comma-separated values in the URL
         history.pushState({}, '', '?tags=' + activeTags.join(','));
     }
 
@@ -217,7 +212,7 @@ window.addEventListener('popstate', () => {
     activeTags = tagsParam ? tagsParam.split(',').filter(Boolean) : [];
     applyTags();
 });
-
+    
 // ----------------------------------------
 // TEXT SLICES DATA
 // ----------------------------------------
