@@ -110,19 +110,20 @@ window.archiveTrack = currentTrack;
 // MULTI-TAG FILTERING & TOGGLES
 // ----------------------------------------
 
-// Define exclusive tags here
+// 1. Define your exclusive tags here (lowercase)
 const exclusiveTags = ['photography']; 
 
 let activeTags = [];
 
-// Parse initial tags from URL
+// Parse initial tags from URL on load
 const urlParams = new URLSearchParams(window.location.search);
 const initialTags = urlParams.get('tags') || urlParams.get('tag');
 if (initialTags) {
     activeTags = initialTags.split(',').map(t => t.trim().toLowerCase()).filter(Boolean);
 }
 
-function applyTags() {
+// 2. Helper function to apply the display changes to the DOM
+function renderGalleryChanges() {
     document.querySelectorAll('.image-slice').forEach(post => {
         const postTags = (post.dataset.tags || '')
             .split(',')
@@ -132,19 +133,17 @@ function applyTags() {
         const isExclusivePost = postTags.some(tag => exclusiveTags.includes(tag));
 
         if (activeTags.length === 0) {
-            // NO TAGS SELECTED:
-            // Show all posts UNLESS it's an exclusive post (e.g. photography)
+            // NO TAGS SELECTED: Show all posts UNLESS it's an exclusive post
             post.style.display = isExclusivePost ? 'none' : '';
             return;
         }
 
-        // TAGS ARE SELECTED:
-        // Show post if it matches any active tag
+        // TAGS ARE SELECTED: Show post if it matches any active tag
         const isMatch = activeTags.some(tag => postTags.includes(tag));
         post.style.display = isMatch ? '' : 'none';
     });
 
-    // Update link visual states
+    // Update the visual states of the links
     const body = document.body;
     if (activeTags.length > 0) {
         body.classList.add('tags-active');
@@ -162,6 +161,18 @@ function applyTags() {
     });
 }
 
+// 3. Main function to trigger the layout shift (with View Transitions API)
+function applyTags() {
+    // If the browser supports View Transitions, run the cross-fade animation
+    if (document.startViewTransition) {
+        document.startViewTransition(() => renderGalleryChanges());
+    } else {
+        // Fallback for older browsers
+        renderGalleryChanges();
+    }
+}
+
+// Apply on initial page load
 applyTags();
 
 // ----------------------------------------
@@ -179,40 +190,48 @@ document.addEventListener('click', event => {
 
     const clickedTag = href.replace('?tag=', '').toLowerCase();
 
-    // TOGGLE LOGIC
+    // 4. TOGGLE LOGIC
     if (exclusiveTags.includes(clickedTag)) {
+        // If clicking an EXCLUSIVE tag:
         if (activeTags.length === 1 && activeTags[0] === clickedTag) {
+            // It's the only one active, toggle it off
             activeTags = [];
         } else {
+            // Otherwise, make it the ONLY active tag
             activeTags = [clickedTag];
         }
     } else {
+        // If clicking a REGULAR tag:
+        // Clear out any exclusive tags that might be active
         activeTags = activeTags.filter(t => !exclusiveTags.includes(t));
 
         if (activeTags.includes(clickedTag)) {
+            // If already active, toggle off
             activeTags = activeTags.filter(t => t !== clickedTag);
         } else {
+            // If not active, toggle on
             activeTags.push(clickedTag);
         }
     }
 
-    // Update URL
+    // 5. Update URL to match current state
     if (activeTags.length === 0) {
         history.pushState({}, '', window.location.pathname);
     } else {
         history.pushState({}, '', '?tags=' + activeTags.join(','));
     }
 
+    // Run the animation and filter
     applyTags();
 });
 
+// Handle browser Back/Forward buttons
 window.addEventListener('popstate', () => {
     const params = new URLSearchParams(window.location.search);
     const tagsParam = params.get('tags') || params.get('tag');
     activeTags = tagsParam ? tagsParam.split(',').filter(Boolean) : [];
     applyTags();
 });
-    
 // ----------------------------------------
 // TEXT SLICES DATA
 // ----------------------------------------
