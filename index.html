@@ -16,7 +16,7 @@ body {
     <div id="intro-message">
         Click to enter
     </div>
-    <label id="music-label">       
+    <label id="music-label">        
         Music?
         <input type="checkbox" id="music-checkbox" checked>
     </label>
@@ -192,7 +192,6 @@ function renderGalleryChanges() {
 }
     
 function applyTags() {
-
     renderGalleryChanges();
 }
 
@@ -258,7 +257,7 @@ const textSlices = [
     side: 'left'
    },
 
-    {% for slice in site.slices %}
+   {% for slice in site.slices %}
     {
         text1: {{ slice.text_1 | default: "" | jsonify }},
         link1: {{ slice.link_1 | default: "" | jsonify }},
