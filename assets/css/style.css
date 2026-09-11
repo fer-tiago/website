@@ -56,9 +56,9 @@ html, body {
     opacity: 1;
     
     transition: 
-        flex 0.5s var(--delay, 0s),
-        width 0.5s var(--delay, 0s),
-        margin-right 0.5s var(--delay, 0s),
+        flex 0.8s var(--delay, 0s),
+        width 0.8s var(--delay, 0s),
+        margin-right 0.8s var(--delay, 0s),
         opacity 0.2s ease calc(var(--delay, 0s) + 0.5s);
 }
 
@@ -72,9 +72,9 @@ html, body {
     
     transition: 
         opacity 0.2s ease var(--delay, 0s),
-        flex 0.5s calc(var(--delay, 0s) + 0.2s),
-        width 0.5s calc(var(--delay, 0s) + 0.2s),
-        margin-right 0.5s calc(var(--delay, 0s) + 0.2s);
+        flex 0.8s calc(var(--delay, 0s) + 0.2s),
+        width 0.8s calc(var(--delay, 0s) + 0.2s),
+        margin-right 0.8s calc(var(--delay, 0s) + 0.2s);
 }
 
 .image-slice img {
