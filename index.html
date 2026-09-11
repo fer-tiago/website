@@ -118,6 +118,9 @@ const savedTags = sessionStorage.getItem('archiveActiveTags');
 let activeTags = savedTags ? JSON.parse(savedTags) : ['art', 'design'];
 
 // 2. Helper function to apply the display changes to the DOM
+// Add this tracking flag at the top of your function
+let isFirstLoad = true;
+
 function renderGalleryChanges() {
     document.querySelectorAll('.image-slice').forEach(post => {
         const postTags = (post.dataset.tags || '')
@@ -128,27 +131,49 @@ function renderGalleryChanges() {
         let shouldShow = false;
 
         if (activeTags.length === 0) {
-            // NO TAGS SELECTED: Show all UNLESS it's an exclusive post
             shouldShow = !isExclusivePost;
         } else {
-            // TAGS ARE SELECTED: Show post if it matches any active tag
             shouldShow = activeTags.some(tag => postTags.includes(tag));
         }
 
-        if (shouldShow) {
-            // If the image was previously hidden, generate a random delay before showing it
-            if (post.style.display === 'none') {
-                // Generate a random delay between 0 and 0.4 seconds
-                const randomDelay = (Math.random() * 0.4).toFixed(2);
-                post.style.animationDelay = `${randomDelay}s`;
+        const isCurrentlyHidden = post.classList.contains('hidden-slice');
+        const willBeHidden = !shouldShow;
+
+        // Clean up any hardcoded display rules from previous versions of the code
+        post.style.display = '';
+
+        if (isFirstLoad) {
+            // ON INITIAL LOAD: Snap instantly to the correct state
+            post.style.transitionDuration = '0s';
+            post.style.transitionDelay = '0s';
+            
+            if (willBeHidden) {
+                post.classList.add('hidden-slice');
+            } else {
+                post.classList.remove('hidden-slice');
             }
-            post.style.display = '';
-        } else {
-            post.style.display = 'none';
-            post.style.animationDelay = '0s';
+            
+            // Restore normal transition speeds for future clicks
+            setTimeout(() => {
+                post.style.transitionDuration = '';
+            }, 50);
+
+        } else if (isCurrentlyHidden !== willBeHidden) {
+            // ON TAG CLICK: The state is changing, apply a random delay!
+            const randomDelay = (Math.random() * 0.4).toFixed(2);
+            post.style.transitionDelay = `${randomDelay}s`;
+            
+            if (willBeHidden) {
+                post.classList.add('hidden-slice');
+            } else {
+                post.classList.remove('hidden-slice');
+            }
         }
     });
 
+    isFirstLoad = false;
+
+    // Update the visual states of the links
     const body = document.body;
     if (activeTags.length > 0) {
         body.classList.add('tags-active');
@@ -165,7 +190,7 @@ function renderGalleryChanges() {
         }
     });
 }
-
+    
 function applyTags() {
 
     renderGalleryChanges();
