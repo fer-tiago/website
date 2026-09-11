@@ -48,18 +48,17 @@ html, body {
 
 .image-slice {
     flex: 0 0 80px;
-    width: 80px; /* Explicit width forces the horizontal slide */
+    width: 80px; 
     height: 100vh;
     margin-right: 8px;
     overflow: hidden;
     position: relative;
     opacity: 1;
     
-    /* EXPANDING: Slide width open first (0.5s), THEN fade in (0.2s) */
     transition: 
-        flex 0.5s ease var(--delay, 0s),
-        width 0.5s ease var(--delay, 0s),
-        margin-right 0.5s ease var(--delay, 0s),
+        flex 0.5s var(--delay, 0s),
+        width 0.5s var(--delay, 0s),
+        margin-right 0.5s var(--delay, 0s),
         opacity 0.2s ease calc(var(--delay, 0s) + 0.5s);
 }
 
@@ -71,12 +70,11 @@ html, body {
     opacity: 0;
     pointer-events: none;
     
-    /* COLLAPSING: Fade out completely (0.2s), THEN slide closed (0.5s) */
     transition: 
         opacity 0.2s ease var(--delay, 0s),
-        flex 0.5s ease calc(var(--delay, 0s) + 0.2s),
-        width 0.5s ease calc(var(--delay, 0s) + 0.2s),
-        margin-right 0.5s ease calc(var(--delay, 0s) + 0.2s);
+        flex 0.5s calc(var(--delay, 0s) + 0.2s),
+        width 0.5s calc(var(--delay, 0s) + 0.2s),
+        margin-right 0.5s calc(var(--delay, 0s) + 0.2s);
 }
 
 .image-slice img {
