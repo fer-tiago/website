@@ -130,7 +130,7 @@ html, body {
     pointer-events: auto;
 }
 
-.text-slice-link:hover {
+.text-slice-link:hover:not(.disable-hover) {
     font-weight: 600;
 }
 
