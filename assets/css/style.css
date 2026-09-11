@@ -52,16 +52,14 @@ html, body {
     height: 100vh;
     overflow: hidden;
     position: relative;
+    transition: flex 0.5s ease, opacity 0.5s ease;
 }
 
-@keyframes fadeInTag {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
+.image-slice.hidden-slice {
+    flex: 0 0 0px !important;
+    opacity: 0;
+    pointer-events: none;
 
-.image-slice {
-    animation: fadeInTag 0.5s ease both;
-}
 
 .image-slice img {
     position: absolute;
