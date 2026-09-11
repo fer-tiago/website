@@ -26,7 +26,6 @@ html, body {
     overflow-x: auto;
     overflow-y: hidden;
 
-    gap: 8px;
     height: 100vh;
     width: 100vw; 
 
@@ -50,15 +49,25 @@ html, body {
 .image-slice {
     flex: 0 0 80px;
     height: 100vh;
+    margin-right: 8px;
     overflow: hidden;
     position: relative;
-    transition: opacity 0.5s ease;
+    opacity: 1;
+    transition:
+        opacity 0.5s ease var(--delay, 0s),
+        flex 0s var(--delay, 0s),
+        margin-right 0s var(--delay, 0s);
 }
 
 .image-slice.hidden-slice {
     flex: 0 0 0px !important;
+    margin-right: 0px !important;
     opacity: 0;
     pointer-events: none;
+    transition:
+        opacity 0.5s ease var(--delay, 0s),
+        flex 0s calc(var(--delay, 0s) + 0.5s),
+        margin-right 0s calc(var(--delay, 0s) + 0.5s);
 }
 
 .image-slice img {
@@ -84,7 +93,7 @@ html, body {
 
     color: #666;
     text-decoration: none;
-
+    margin-right: 8px;
     font-size: 20px;
     letter-spacing: 1px;
 
