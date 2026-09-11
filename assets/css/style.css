@@ -52,7 +52,13 @@ html, body {
     height: 100vh;
     overflow: hidden;
     position: relative;
+    transition: flex 0.5s ease, opacity 0.5s ease;
 }
+
+.image-slice.hidden-slice {
+    flex: 0 0 0px !important;
+    opacity: 0;
+    pointer-events: none;
 
 
 .image-slice img {
