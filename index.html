@@ -179,7 +179,10 @@ document.addEventListener('click', event => {
     if (!href || !href.startsWith('?tag=')) return;
 
     event.preventDefault();
-
+    
+    link.classList.add('disable-hover');
+    link.addEventListener('mouseleave', () => link.classList.remove('disable-hover'), { once: true });
+    
     const clickedTag = href.replace('?tag=', '').toLowerCase();
 
     // 4. TOGGLE LOGIC
