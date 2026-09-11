@@ -310,7 +310,7 @@ font-weight: 600;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    width:60%;
+    width: 60%;
     color: #c1c1c1;
     pointer-events: auto;
 }
@@ -320,7 +320,7 @@ font-weight: 600;
   direction: ltr;
 
  
-  width: 20px;       
+  width: 20px;        
   height: 120px;      
 
   -webkit-appearance: none;
@@ -333,9 +333,9 @@ font-weight: 600;
 }
 
 .volume-slider::-webkit-slider-runnable-track {
-  width: 1px;       
-  height: 100%;       
- background: currentColor;
+  width: 1px;        
+  height: 100%;        
+   background: currentColor;
   border: none;
 }
 
@@ -355,7 +355,7 @@ font-weight: 600;
 .volume-slider::-moz-range-track {
   width: 1px;
   height: 100%;
- background: currentColor;
+   background: currentColor;
   border: none;
 
 }
