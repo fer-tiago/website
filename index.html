@@ -215,19 +215,24 @@ document.addEventListener('click', event => {
     
     const clickedTag = href.replace('?tag=', '').toLowerCase();
 
-    // 4. TOGGLE LOGIC
+  // 4. TOGGLE LOGIC
     if (exclusiveTags.includes(clickedTag)) {
+        // Prevent deselecting if it's already the only active tag
         if (activeTags.length === 1 && activeTags[0] === clickedTag) {
-            activeTags = [];
-        } else {
-            activeTags = [clickedTag];
+            return; 
         }
+        activeTags = [clickedTag];
     } else {
-        activeTags = activeTags.filter(t => !exclusiveTags.includes(t));
-
+        // If clicking a normal tag that is already active
         if (activeTags.includes(clickedTag)) {
+            // Prevent deselecting if it is the very last active tag
+            if (activeTags.length === 1) {
+                return;
+            }
             activeTags = activeTags.filter(t => t !== clickedTag);
         } else {
+            // Clear exclusive tags when selecting a normal tag
+            activeTags = activeTags.filter(t => !exclusiveTags.includes(t));
             activeTags.push(clickedTag);
         }
     }
