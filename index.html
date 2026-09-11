@@ -115,7 +115,7 @@ const exclusiveTags = ['photography', 'hidden'];
 
 // Silently load active tags from background memory instead of the URL
 const savedTags = sessionStorage.getItem('archiveActiveTags');
-let activeTags = savedTags ? JSON.parse(savedTags) : [];
+let activeTags = savedTags ? JSON.parse(savedTags) : ['art', 'design'];
 
 // 2. Helper function to apply the display changes to the DOM
 function renderGalleryChanges() {
