@@ -125,19 +125,30 @@ function renderGalleryChanges() {
             .map(t => t.trim().toLowerCase());
 
         const isExclusivePost = postTags.some(tag => exclusiveTags.includes(tag));
+        let shouldShow = false;
 
         if (activeTags.length === 0) {
             // NO TAGS SELECTED: Show all UNLESS it's an exclusive post
-            post.style.display = isExclusivePost ? 'none' : '';
-            return;
+            shouldShow = !isExclusivePost;
+        } else {
+            // TAGS ARE SELECTED: Show post if it matches any active tag
+            shouldShow = activeTags.some(tag => postTags.includes(tag));
         }
 
-        // TAGS ARE SELECTED: Show post if it matches any active tag
-        const isMatch = activeTags.some(tag => postTags.includes(tag));
-        post.style.display = isMatch ? '' : 'none';
+        if (shouldShow) {
+            // If the image was previously hidden, generate a random delay before showing it
+            if (post.style.display === 'none') {
+                // Generate a random delay between 0 and 0.4 seconds
+                const randomDelay = (Math.random() * 0.4).toFixed(2);
+                post.style.animationDelay = `${randomDelay}s`;
+            }
+            post.style.display = '';
+        } else {
+            post.style.display = 'none';
+            post.style.animationDelay = '0s';
+        }
     });
 
-    // Update the visual states of the links
     const body = document.body;
     if (activeTags.length > 0) {
         body.classList.add('tags-active');
@@ -155,13 +166,9 @@ function renderGalleryChanges() {
     });
 }
 
-// 3. Main function to trigger the layout shift (with View Transitions API)
 function applyTags() {
-    if (document.startViewTransition) {
-        document.startViewTransition(() => renderGalleryChanges());
-    } else {
-        renderGalleryChanges();
-    }
+
+    renderGalleryChanges();
 }
 
 // Apply on initial page load
