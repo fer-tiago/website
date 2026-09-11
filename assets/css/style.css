@@ -60,7 +60,7 @@ html, body {
 }
 
 .image-slice {
-    animation: fadeInTag 0.5s ease forwards;
+    animation: fadeInTag 0.5s ease both;
 }
 
 .image-slice img {
