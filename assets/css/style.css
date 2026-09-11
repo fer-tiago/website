@@ -56,7 +56,7 @@ html, body {
 transition: 
         flex 0.5s ease var(--delay, 0s),
         margin-right 0.5s ease var(--delay, 0s),
-        opacity 0.5s ease var(--delay, 0s);
+        opacity 0.5s ease calc(var(--delay, 0s) + 0.5s);
 }
 
 
@@ -65,11 +65,10 @@ transition:
     margin-right: 0px !important;
     opacity: 0;
     pointer-events: none;
-    /* Collapsing: Fade out rapidly, finish the slide completely invisible */
     transition: 
-        flex 0.5s ease var(--delay, 0s),
-        margin-right 0.5s ease var(--delay, 0s),
-        opacity 0.2s ease var(--delay, 0s);
+        opacity 0.2s ease var(--delay, 0s),
+        flex 0.5s ease calc(var(--delay, 0s) + 0.2s),
+        margin-right 0.5s ease calc(var(--delay, 0s) + 0.2s);
 }
 
 .image-slice img {
