@@ -54,14 +54,6 @@ html, body {
     position: relative;
 }
 
-@keyframes fadeInTag {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-.image-slice {
-    animation: fadeInTag 0.5s ease both;
-}
 
 .image-slice img {
     position: absolute;
