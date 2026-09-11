@@ -196,7 +196,6 @@ function applyTags() {
 }
 
 // Apply on initial page load
-applyTags();
 
 // ----------------------------------------
 // INTERCEPT TAG LINKS
@@ -389,7 +388,7 @@ textSlices
     .map(createTextSlice)
     .forEach(insertSlice);
 
-
+applyTags();
 
 // ----------------------------------------
 // PLAYER CONTROLS
