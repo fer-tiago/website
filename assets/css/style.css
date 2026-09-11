@@ -59,7 +59,7 @@ html, body {
     flex: 0 0 0px !important;
     opacity: 0;
     pointer-events: none;
-
+}
 
 .image-slice img {
     position: absolute;
