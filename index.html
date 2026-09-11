@@ -144,8 +144,8 @@ function renderGalleryChanges() {
 
         if (isFirstLoad) {
             // ON INITIAL LOAD: Snap instantly to the correct state
+            post.style.setProperty('--delay', '0s');
             post.style.transitionDuration = '0s';
-            post.style.transitionDelay = '0s';
             
             if (willBeHidden) {
                 post.classList.add('hidden-slice');
@@ -159,9 +159,9 @@ function renderGalleryChanges() {
             }, 50);
 
         } else if (isCurrentlyHidden !== willBeHidden) {
-            // ON TAG CLICK: The state is changing, apply a random delay!
+            // ON TAG CLICK: Pass the random delay to CSS variables
             const randomDelay = (Math.random() * 0.4).toFixed(2);
-            post.style.transitionDelay = `${randomDelay}s`;
+            post.style.setProperty('--delay', `${randomDelay}s`);
             
             if (willBeHidden) {
                 post.classList.add('hidden-slice');
