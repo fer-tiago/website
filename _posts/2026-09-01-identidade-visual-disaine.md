@@ -5,7 +5,7 @@ tags:
   - design
 cover_image: https://images.tiagoferreira.work/disaine/DISAINE.png
 ---
-An imagined activist organization's visual identity of national Portuguese design (Disaine) and Ojibwe stylized logo.
+An imagined activist organization's visual identity of national portuguese design (Disaine) and Ojibwe stylized logo.
 
 ![Inspiração](https://images.tiagoferreira.work/disaine/tiagoferreiramangraf-04.png)
 
