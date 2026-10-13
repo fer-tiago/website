@@ -5,4 +5,4 @@ tags:
   - art
 cover_image: https://images.tiagoferreira.work/cs/loss%20(4).png
 ---
-Representing the worldwide love and connection created by online gaming matchmaking systems. Inspired by "Counter-Strike".
+Digital drawing representing the international love and connection facilitated by online gaming matchmaking systems. Inspired by "Counter-Strike".
