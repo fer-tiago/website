@@ -5,7 +5,7 @@ tags:
   - design
 cover_image: https://images.tiagoferreira.work/OOTCITA/dc3%20publica%C3%A7%C3%A3o%20final4.jpg
 ---
-"[Out of The Closets](https://images.tiagoferreira.work/OOTCITA/archive%20spreads.pdf) Into [The Archives](https://images.tiagoferreira.work/OOTCITA/archive%20spreads.pdf)" exposes some of the most important works relevant to the propagation and utility of design, enfatizing the notability of queer design and its provenient urgency, in a global scale. It was created to make relevant connections to the future of communications design, connecting mainly two important topics.
+"[Out of The Closets](https://images.tiagoferreira.work/OOTCITA/OOCITA.pdf) Into [The Archives](https://images.tiagoferreira.work/OOTCITA/archive%20spreads.pdf)" exposes some of the most important works relevant to the propagation and utility of design, enfatizing the notability of queer design and its provenient urgency, in a global scale. It was created to make relevant connections to the future of communications design, connecting mainly two important topics.
 
 
 
