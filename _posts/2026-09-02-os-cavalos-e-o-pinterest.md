@@ -1,5 +1,5 @@
 ---
-title: Os Cavalos e O Pinterest
+title: Cavalos
 date: 2026-08-31
 tags:
   - art
