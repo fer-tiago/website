@@ -5,4 +5,4 @@ tags:
   - art
 cover_image: https://images.tiagoferreira.work/nossocao/loss%20(5).png
 ---
-Representativo dos cães que são cientes e falam com botões
+Digital drawing and collage representing the use of a "dog soundboard" and the subsequent understanding of complex human emotions
