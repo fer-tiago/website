@@ -1,17 +1,15 @@
 ---
-title: Identidade visual "Disaine"
+title: '"Disaine" Visual Identity'
 date: 2025-07-30
 tags:
   - design
 cover_image: https://images.tiagoferreira.work/disaine/DISAINE.png
 ---
-Identidade visual de uma imaginada organização ativista de design nacional (Disaine) e logótipo estilizado em Ojibwe  
-  
-
+An imagined activist organization's visual identity of national Portuguese design (Disaine) and Ojibwe stylized logo.
 
 ![Inspiração](https://images.tiagoferreira.work/disaine/tiagoferreiramangraf-04.png)
 
-
+This identity's main inspiration was the Ojibwe tribes and their roots as one of the first examples of communications design. Their language, writing, graphics and phonetic alphabet was used as inspiration to create the visual identity.
 
 ![Tipografia](https://images.tiagoferreira.work/disaine/tiagoferreiramangraf-05.png)
 

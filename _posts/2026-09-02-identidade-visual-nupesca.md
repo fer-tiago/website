@@ -1,11 +1,11 @@
 ---
-title: NUPesca Visual Identity
+title: NUPesca Logo
 date: 2026-05-13
 tags:
   - design
 cover_image: https://images.tiagoferreira.work/nupesca/nupesca%20cove55r.png
 ---
-Visual Identity for the Faculty of Science and Technology's fishing nucleus, based on a catfish
+Logo for the Faculty of Science and Technology's fishing nucleus, based on a catfish
 
 ![NUPESCA](https://images.tiagoferreira.work/nupesca/2Artboard%201_11%402x.png)
 

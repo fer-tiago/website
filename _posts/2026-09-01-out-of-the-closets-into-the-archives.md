@@ -5,25 +5,23 @@ tags:
   - design
 cover_image: https://images.tiagoferreira.work/OOTCITA/dc3%20publica%C3%A7%C3%A3o%20final4.jpg
 ---
-"[Out of The Closets](https://images.tiagoferreira.work/OOTCITA/archive%20spreads.pdf) Into [The Archives](https://images.tiagoferreira.work/OOTCITA/archive%20spreads.pdf)" expõe alguns dos mais importantes títulos relevantes para a propagação e utilidade do design, enfatizando a notabilidade do designqueer e a urgência daí proveniente, numa escala global. Visamos criar ligações relevantes para o futuro do design de comunicação, relacionando principalmente dois tópicos importantes._
+"[Out of The Closets](https://images.tiagoferreira.work/OOTCITA/archive%20spreads.pdf) Into [The Archives](https://images.tiagoferreira.work/OOTCITA/archive%20spreads.pdf)" exposes some of the most important works relevant to the propagation and utility of design, enfatizing the notability of queer design and its provenient urgency, in a global scale. It was created to make relevant connections to the future of communications design, connecting mainly two important topics.
 
 
 
 ![capa](https://images.tiagoferreira.work/OOTCITA/capa%20nova.png)
 
-O primeiro destaca a cultura queer e a sua relação compontos como a tipografia e o simbolismo da imperfeição no alcance de um design útil, inovador e revolucionário. Destaca também a urgência do grafismo queer apresentada em vários textos de escritores e designers icónicos da comunidade, com o propósito claro de combater o preconceito e a heteronormatividade. O segundo tópico destaca o arquivamento como um meio de preservar a verdade, a história e a realidade. Arquivar é um ato político, social e cultural. É o que determina o que o futuro saberá sobre o passado: o que continuará a ter voz, ou o que ficará para sempre silenciado._ 
+The first highlights queer culture and its relationship with tools like typography and also the symbolism of imperfection in reaching an useful, inovative and revolutionary design. It also emphasizes the urgency of queer graphism presented in texts by multiple iconic designers and writers from the community, with the clear purpose of combatting prejudice and heteronormativity.
 
 
 
 ![pub1](https://images.tiagoferreira.work/OOTCITA/dc3%20publica%C3%A7%C3%A3o%20final26.jpg)
 
-  
-
+ The second topic highlights archiving as means of preserving the truth, history and reality. Archiving is a political, social and cultural act. It's what determins what the future knows from the past: what keeps its voice or what will forever hold its peace.
 
 ![soulellis](https://images.tiagoferreira.work/OOTCITA/dc3%20publica%C3%A7%C3%A3o%20final5.jpg)
 
-  
-Conhecimento em forma de artefacto. O arquivamento reforçou ao longo dos anos o esforço queer de reconhecimentoe quebra da sociedade heteronormativa, esforço retratado em publicações de Paul Soulellis como Urgent Archives (2017) e no trabalho de Audre Lorde em Your Silence Will Not Protect You (2016)." 
+Knowledge as artifact. Archiving reinforced queer efforts of recognizement and stopping heteronormative society prejudices along the years, effort demonstrated in publications by Paul Soulellis like Urgent Archives (2017) and in the work of Audre Lorde in Your Silence Will Not Protect You (2016)."
 
 ![ccc](https://images.tiagoferreira.work/OOTCITA/apresentacao-final-05.png)
 
@@ -31,7 +29,7 @@ Conhecimento em forma de artefacto. O arquivamento reforçou ao longo dos anos o
 
 ![ddd](https://images.tiagoferreira.work/OOTCITA/apresentacao-final-09.png)
 
-Publicação impressa com dois livros: A publicação dividida em "queer" e "archive" e o arquivo. 
+Publication printed with two books: split in "queer" and "archive"
 
 ![queer6](https://images.tiagoferreira.work/OOTCITA/apresentacao-final-03.png)
 
@@ -39,9 +37,7 @@ Publicação impressa com dois livros: A publicação dividida em "queer" e "arc
 
 ![aquivo](https://images.tiagoferreira.work/OOTCITA/dc3%20ARQUIVO20.jpg)
 
-  
-Publicação realizada por Tiago Ferreira & Inês Costa    
-
+Publication created by Tiago Ferreira & Inês Costa    
 
 ![45](https://images.tiagoferreira.work/OOTCITA/dc3%20ARQUIVO15.jpg)
 
