@@ -37,17 +37,15 @@ title: "Tiago Ferreira"
 
 <script>
 function goBack() {
+    var internal = document.referrer &&
+        new URL(document.referrer).origin === location.origin;
 
-    if (history.length > 1) {
-
+    if (internal && history.length > 1) {
         history.back();
-
     } else {
-
-        window.location.href =
-            '{{ "/" | relative_url }}';
-
+        window.location.href = '{{ "/" | relative_url }}';
     }
+}
 
 }
 </script>

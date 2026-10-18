@@ -59,8 +59,9 @@ const tracks = [
 
 ];
 
-let player;
-let currentTrack;
+let player = null;
+let currentTrack = null;
+const hasTracks = tracks.length > 0;
 
 // Helper to detect page refresh
 function isPageRefresh() {
@@ -74,37 +75,35 @@ function isPageRefresh() {
     return false;
 }
 
-// Get or pick track
-const savedTrackIndex = sessionStorage.getItem('currentTrackIndex');
+// Get or pick track (skipped entirely if the music collection is empty)
+if (hasTracks) {
+    const savedTrackIndex = sessionStorage.getItem('currentTrackIndex');
 
-if (savedTrackIndex !== null && !isPageRefresh()) {
-    // Navigating within site — keep same track
-    currentTrack = tracks[savedTrackIndex];
-} else {
-    // First visit or refresh — pick random
-    const randomIndex = Math.floor(Math.random() * tracks.length);
-    currentTrack = tracks[randomIndex];
-    sessionStorage.setItem('currentTrackIndex', randomIndex);
-}
-
-// Create or reuse player
-if (window.archivePlayer && window.archiveTrack && window.archiveTrack.file === currentTrack.file) {
-    player = window.archivePlayer;
-} else {
-    player = new Audio(currentTrack.file);
-    player.loop = true;
-
-    const savedVolume = localStorage.getItem('archiveVolume');
-    if (savedVolume !== null) {
-        player.volume = parseFloat(savedVolume);
+    if (savedTrackIndex !== null && !isPageRefresh() && tracks[savedTrackIndex]) {
+        // Navigating within site — keep same track
+        currentTrack = tracks[savedTrackIndex];
     } else {
-        player.volume = 0.2;
+        // First visit, refresh, or saved track no longer exists — pick random
+        const randomIndex = Math.floor(Math.random() * tracks.length);
+        currentTrack = tracks[randomIndex];
+        sessionStorage.setItem('currentTrackIndex', randomIndex);
     }
 
-    window.archivePlayer = player;
-}
+    // Create or reuse player
+    if (window.archivePlayer && window.archiveTrack && window.archiveTrack.file === currentTrack.file) {
+        player = window.archivePlayer;
+    } else {
+        player = new Audio(currentTrack.file);
+        player.loop = true;
 
-window.archiveTrack = currentTrack;
+        const savedVolume = parseFloat(localStorage.getItem('archiveVolume'));
+        player.volume = (savedVolume >= 0 && savedVolume <= 1) ? savedVolume : 0.2;
+
+        window.archivePlayer = player;
+    }
+
+    window.archiveTrack = currentTrack;
+}
 
 // ----------------------------------------
 // MULTI-TAG FILTERING & TOGGLES (CLEAN URL)
@@ -114,11 +113,16 @@ window.archiveTrack = currentTrack;
 const exclusiveTags = ['photography', 'hidden']; 
 
 // Silently load active tags from background memory instead of the URL
-const savedTags = sessionStorage.getItem('archiveActiveTags');
-let activeTags = savedTags ? JSON.parse(savedTags) : ['art', 'design'];
+let activeTags = ['art', 'design'];
+try {
+    const parsedTags = JSON.parse(sessionStorage.getItem('archiveActiveTags'));
+    if (Array.isArray(parsedTags)) activeTags = parsedTags;
+} catch (err) {
+    // Corrupted value in sessionStorage — fall back to the defaults
+}
 
 // 2. Helper function to apply the display changes to the DOM
-// Add this tracking flag at the top of your function
+// True until the first render (first render snaps instantly, later ones animate)
 let isFirstLoad = true;
 
 function renderGalleryChanges() {
@@ -254,9 +258,7 @@ const textSlices = [
     isPlayer: true,
 
     trackText:
-        currentTrack.title +
-        ' — ' +
-        currentTrack.artist,
+        currentTrack ? currentTrack.title + ' — ' + currentTrack.artist : '',
 
     side: 'left'
    },
@@ -390,6 +392,7 @@ function insertSlice(element) {
 // ----------------------------------------
 
 textSlices
+    .filter(data => !data.isPlayer || hasTracks)
     .map(createTextSlice)
     .forEach(insertSlice);
 
@@ -506,7 +509,7 @@ if (musicLabel) {
 }
 
 async function startMusicIfAllowed() {
-    if (musicOn) {
+    if (musicOn && player) {
         try {
             await player.play();
         } catch (err) {
@@ -522,12 +525,22 @@ async function startMusicIfAllowed() {
 const overlay = document.getElementById('intro-overlay');
 const hasEntered = sessionStorage.getItem('archiveEntered');
 
+let horizontalScrollEnabled = false;
+
 function enableHorizontalScroll() {
+    // This is called from several places, so only attach the listener once
+    if (horizontalScrollEnabled) return;
+    horizontalScrollEnabled = true;
+
     gallery.addEventListener(
         'wheel',
         (event) => {
             event.preventDefault();
-            gallery.scrollLeft += event.deltaY;
+            // Follow whichever axis the user is scrolling most (trackpad swipes)
+            const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY)
+                ? event.deltaX
+                : event.deltaY;
+            gallery.scrollLeft += delta;
         },
         { passive: false }
     );
@@ -536,7 +549,8 @@ function enableHorizontalScroll() {
 async function enterArchive() {
     sessionStorage.setItem('archiveEntered', 'true');
 
-    await startMusicIfAllowed(); 
+    // Start playback right away (no await, so a slow audio load can't delay the overlay)
+    startMusicIfAllowed();
 
     enableHorizontalScroll();
 
