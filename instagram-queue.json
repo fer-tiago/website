@@ -2,7 +2,7 @@
 layout: null
 ---
 [
-  {% assign design_posts = site.posts | where_exp: "item", "item.tags contains 'design'" | sort: "date" %}
+  {% assign design_posts = site.posts | where_exp: "item", "item.tags contains 'design' or item.tags contains 'art'" | sort: "date" %}
   {% assign valid_posts = "" | split: "" %}
   {% for post in design_posts %}
     {% unless post.cover_image contains ".gif" %}
@@ -13,6 +13,7 @@ layout: null
   {
     "id": {{ post.url | remove: ".html" | jsonify }},
     "title": {{ post.title | jsonify }},
+    "tags": {{ post.tags | jsonify }},
     "date": {{ post.date | date: "%Y-%m-%d" | jsonify }},
     "cover_image": {{ post.cover_image | jsonify }},
     "url": {{ post.url | absolute_url | jsonify }}
