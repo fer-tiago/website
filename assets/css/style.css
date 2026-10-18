@@ -184,7 +184,7 @@ body.tags-active .text-slice-link.active-tag {
 
 #intro-overlay.hidden {
     opacity: 0;
-    visibility: ;
+    visibility: hidden;
 }
 
 
