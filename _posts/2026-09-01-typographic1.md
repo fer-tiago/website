@@ -1,5 +1,5 @@
 ---
-title: "Typographic and visual study #1"
+title: "Typographic Study #1"
 date: 2025-04-03
 tags:
   - design
