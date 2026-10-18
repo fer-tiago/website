@@ -1,5 +1,5 @@
 ---
-title: Youngtimers magazine reimagination
+title: Youngtimers Reimagination
 date: 2024-12-13
 tags:
   - design
