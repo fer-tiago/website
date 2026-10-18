@@ -34,7 +34,7 @@ body {
     >
         <img
             src="{{ post.cover_image }}"
-            alt="{{ post.title }}"
+            alt="{{ post.title | escape }}"
         >
     </a>
 {% endfor %}
