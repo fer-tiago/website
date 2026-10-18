@@ -1,6 +1,5 @@
 baseurl: ""
-permalink: pretty
-
+permalink: /:title/
 collections:
   slices:
     output: false
